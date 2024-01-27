@@ -21,3 +21,47 @@
     border-radius: 2px;
     padding: 5px;
 }
+
+/* Form Styles */
+#addiction-form {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#addiction-form h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+#addiction-form label {
+    display: block;
+    margin: 10px 0;
+}
+
+#addiction-form input,
+#addiction-form textarea,
+#addiction-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#addiction-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#addiction-form button:hover {
+    background-color: #0056b3;
+}
