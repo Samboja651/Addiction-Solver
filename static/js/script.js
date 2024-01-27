@@ -1,4 +1,4 @@
-document.getElementById('addiction-form').addEventListener('submit', function(event) {
+document.getElementById('addiction-form-section').addEventListener('submit', function(event) {
     var form = event.target;
     var isValid = true;
 

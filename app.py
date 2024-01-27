@@ -9,19 +9,14 @@ def test_stories():
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        addiction_type = request.form.get('addiction-type')
-        duration = request.form.get('duration')
-        cause = request.form.get('cause')
-        severity = request.form.get('severity')
-        age = request.form.get('age')
-        gender = request.form.get('gender')
+        required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
+        form_data = {field: request.form.get(field) for field in required_fields}
 
-        if not (addiction_type and duration and cause and severity and age and gender):
+        if not all(form_data.values()):
             return "Please fill in all fields."
 
         return "Form submitted successfully!"
 
     return render_template('f_stories.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
