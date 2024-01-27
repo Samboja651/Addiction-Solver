@@ -58,5 +58,4 @@ def init_db():
         );""")
     
     db.commit()
-
 init_db()
