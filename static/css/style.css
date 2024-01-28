@@ -1,3 +1,10 @@
+.body{
+    background-color: var(--bs-tertiary-bg);
+}
+.success{
+  background-color: var(--bs-success-bg-subtle);
+}
+
 
 /* user story */
 .container{
@@ -16,7 +23,7 @@
 /* animations */
 .col{
     position: relative;
-    animation-name: story;
+    animation-name: stodry;
     animation-duration: 50s;
     animation-iteration-count: 3;
     animation-timing-function: linear;
@@ -33,7 +40,9 @@
     margin-left: -12px;
     border-radius: 3px;
 }
-
+.name h4{
+    color: var(--bs-success-text-emphasis);
+}
 /* Form Styles */
 #addiction-form-section {
     max-width: 600px;
