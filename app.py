@@ -1,10 +1,21 @@
 from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__)
 
-@app.route('/')
+def get_db():
+    db = sqlite3.connect('app.db')
+    return db
+
+@app.route('/', methods=['GET', 'POST'])
 def test_stories():
-    return render_template('f_stories.html')
+    if request.method == 'GET':
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute('SELECT user_name, story FROM success_stories')
+        stories = cursor.fetchall()
+
+        return render_template('f_stories.html', stories=stories)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():

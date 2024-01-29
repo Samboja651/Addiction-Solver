@@ -48,30 +48,14 @@
             <h2 class="text-success">Success Stories</h2>
             <!-- one row for all story display -->
             <div class="row">
-                <!-- story 1 -->
-                <div class="col success">
-                    <div class="name">
-                        <h4 class="dark">{{ username }}</h4>
+                {% for story in stories %}
+                    <div class="col success">
+                        <div class="name">
+                            <h4 class="dark">{{ story[0] }}</h4>
+                        </div>
+                        {{ story[1] }}
                     </div>
-                    {{ story }}
-                    <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque distinctio, enim consequatur iste necessitatibus magni officia possimus explicabo nemo numquam. -->
-                </div>
-                <!-- story 2 -->
-                <div class="col success">
-                    <div class="name">
-                        <h4>{{ username }}</h4>
-                    </div>
-                    {{ story }}
-                    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, sequi asperiores. Voluptatum aliquid harum quidem, eum nemo vel aspernatur? Maxime. -->
-                </div>
-                <!-- story 3 -->
-                <div class="col success">
-                    <div class="name">
-                        <h4>{{ username }}</h4>
-                    </div>
-                    {{ story }}
-                    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, saepe cum praesentium excepturi nostrum quae amet quibusdam repellat sed eaque. -->
-                </div>
+                {%endfor%}              
             </div>
         </div>
     </section>    
