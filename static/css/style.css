@@ -60,45 +60,54 @@ Form Styles
 #addiction-form-section {
     max-width: 600px;
     margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
+    padding: 30px;
+    background-color: #4CAF50; 
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
   
-  #addiction-form-section h2 {
-      text-align: center;
-      color: #007bff;
+  #addiction-form-section h3 {
+    text-align: center;
+    color: burlywood; 
+    margin-bottom: 20px;
   }
   
   #addiction-form-section label {
-      display: block;
-      margin: 10px 0;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
   }
   
   #addiction-form-section input,
   #addiction-form-section textarea,
   #addiction-form-section select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  #addiction-form-section select {
+    height: 40px;
   }
   
   #addiction-form-section button {
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    background-color: #fff; 
+    color: #4CAF50; 
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
   }
   
   #addiction-form-section button:hover {
-      background-color: #0056b3;
-  }
+    background-color: #e0e0e0; 
   
  
-  
+  }
