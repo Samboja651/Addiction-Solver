@@ -40,7 +40,7 @@
 .row{
   overflow: hidden;
   position: relative;
-  animation-name: story;
+  animation-name: stodry;
   animation-duration: 10s;
   animation-iteration-count: 3;
   animation-timing-function: linear;
