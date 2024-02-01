@@ -30,23 +30,28 @@
     display: flexbox;
     gap: 50px;
 }
-
+/*---------- success stories ------------ */
 /* story */
 .col{
     border: 2px solid black;
     border-radius: 5px;
 }
 /* animations */
-.col{
-    position: relative;
-    animation-name: stuory;
-    animation-duration: 50s;
-    animation-iteration-count: 3;
-    animation-timing-function: linear;
+.row{
+  overflow: hidden;
+  position: relative;
+  animation-name: story;
+  animation-duration: 10s;
+  animation-iteration-count: 3;
+  animation-timing-function: linear;
 }
 @keyframes story {
-    from {left: 100%; right: 0%;}
-    to {left: -100%; right: 0%;}
+    from {
+      left: 100%;
+    }
+    to {
+      left: 0%;
+    }
 }
 
 /* user */
@@ -57,7 +62,7 @@
     border-radius: 3px;
 }
 
-
+/* ----------end--------------------------- */
 /* ---------------------------
 coloring the home page
 --------------------------- */
