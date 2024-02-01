@@ -40,8 +40,8 @@
 .row{
   overflow: hidden;
   position: relative;
-  animation-name: stodry;
-  animation-duration: 10s;
+  animation-name: story;
+  animation-duration: 30s;
   animation-iteration-count: 3;
   animation-timing-function: linear;
 }
@@ -50,7 +50,7 @@
       left: 100%;
     }
     to {
-      left: 0%;
+      left: -100%;
     }
 }
 
