@@ -57,7 +57,6 @@ function sendDoctorMessage() {
     })
     .then(response => response.json())
     .then(data => {
-        // Assuming 'messages' is an array of messages returned by the server
         const chatBox = document.getElementById('doctorChat');
         chatBox.innerHTML = data.messages.map(msg => `<p>${msg}</p>`).join('');
     })
