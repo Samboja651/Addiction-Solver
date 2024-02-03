@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -29,5 +29,30 @@ def home():
         return "Form submitted successfully!"
 
     return render_template('f_stories.html')
+
+app = Flask(__name__)
+
+# Placeholder for storing chat messages
+peer_to_peer_chat = []
+doctor_chat = []
+
+@app.route('/')
+def help_page():
+    return render_template('help.html')
+
+# Endpoint for receiving and sending peer-to-peer chat messages
+@app.route('/peer-chat', methods=['POST'])
+def peer_chat():
+    message = request.form.get('message')
+    peer_to_peer_chat.append(message)
+    return jsonify({'messages': peer_to_peer_chat})
+
+# Endpoint for receiving and sending doctor chat messages
+@app.route('/doctor-chat', methods=['POST'])
+def doctor_chat():
+    message = request.form.get('message')
+    doctor_chat.append(message)
+    return jsonify({'messages': doctor_chat})
+
 if __name__ == '__main__':
     app.run(debug=True,port=8000)

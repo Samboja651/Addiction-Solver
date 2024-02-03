@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>Addiction Solver - Help</title>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#support-system">Support System</a></li>
+        </ul>
+    </nav>
+
+    <!-- Support System Section -->
+    <section id="support-system">
+        <div class="container">
+            <h2>Support System</h2>
+            
+            <!-- Peer-to-Peer Forum -->
+            <div class="forum">
+                <h3>Peer-to-Peer Forum</h3>
+                <!-- Placeholder for the chat box -->
+                <div class="chat-box" id="peerToPeerChat">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <!-- Input area for sending messages -->
+                <textarea id="peerMessage" placeholder="Type your message..."></textarea>
+                <button onclick="sendPeerMessage()">Send</button>
+            </div>
+
+            <!-- Personalized Chat with Doctor -->
+            <div class="personalized-chat">
+                <h3>Personalized Chat with Doctor</h3>
+                <!-- Placeholder for the chat box -->
+                <div class="chat-box" id="doctorChat">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <!-- Input area for sending messages -->
+                <textarea id="doctorMessage" placeholder="Type your message..."></textarea>
+                <button onclick="sendDoctorMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="static/js/script.js"></script>
+    <!-- Add script.js file for handling real-time chat functionalities -->
+</body>
+</html>
