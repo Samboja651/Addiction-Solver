@@ -1,3 +1,4 @@
+
 /* navbar items */
 .customize{
     margin: auto;
@@ -21,11 +22,13 @@
 /* story */
 .user-story{
   overflow: hidden;
+  /* position: relative; */
 }
 
 /* user story */
 .container{
   margin-top: 125px;
+  /* position: relative; */
 }
 
 .col{
@@ -33,15 +36,15 @@
     border-radius: 5px;
     /* min-width: 40%; */
 }
-/* animations */
+/* animations 300s -50s*/
 .row{
   overflow: hidden;
   position: relative;
   animation-name: story;
-  animation-duration: 50s;
-  animation-iteration-count: 3;
+  animation-duration: 300s;
+  animation-iteration-count: infinite;
   animation-timing-function: linear;
-  animation-delay: -20s;
+  animation-delay: -50s;
 }
 
 .row:hover{
@@ -53,7 +56,7 @@
       left: 100%;
     }
     to {
-      left: -100%;
+      left: -500%;
     }
 }
 
@@ -63,6 +66,12 @@
     width: 100px;
     margin-left: -12px;
     border-radius: 3px;
+}
+#mylink{
+  text-decoration: none;
+}
+#mylink{
+  color: black;
 }
 
 /* ----------end--------------------------- */

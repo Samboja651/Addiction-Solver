@@ -18,3 +18,16 @@ document.getElementById('addiction-form-section').addEventListener('submit', fun
         event.preventDefault(); // Prevent form submission if validation fails
     }
 });
+
+
+// success story onclick redirect to another page
+// const story = document.getElementsByClassName('col')
+
+// function openStory(){
+//     location.href = 'https://getbootstrap.com/docs/5.3/utilities/shadows/';
+// }
+
+// for(stories of story){
+//     stories.addEventListener('click', openStory)
+// }
+

@@ -56,18 +56,19 @@ def init_db():
             description TEXT,
             link VARCHAR(255) NOT NULL,
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                #    tags for filter
         )""")
+                #    tags for filter
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS success_stories (
                    story_id INTEGER PRIMARY KEY AUTOINCREMENT,
                    user_id INTEGER,
                    user_name TEXT NOT NULL,
                    story TEXT NOT NULL,
+                   story_url TEXT NOT NULL,
                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    FOREIGN KEY (user_id) REFERENCES form_data(user_id)
-                #    description
     )""")
+                #    description
     # table for registration include tags
 
     db.commit()

@@ -48,23 +48,24 @@
         </div>
     </section>
 
-    <section class="user-story ">
-        <div class="container text-center ">
+    <section class="user-story">
+        <div class="container text-center">
             <h2 class="text-success">Success Stories</h2>
             <!-- one row for all story display -->
-            <div class="row d-flex flex-nowrap grid gap-3 " style=" width: fit-content; height: fit-content;">
+            <div class="row d-flex flex-nowrap grid gap-3 " style="width: 500vw;">
                 {% for story in stories %}                    
-                    <div class="col success" style="min-width: 30vw;">
-                        <div class="name">
-                            <h4 class="dark">{{ story[0] }}</h4>
-                        </div>
-                        {{ story[1] }}
+                    <div class="col success" id="story" style="min-width: 25vw; max-width: 25vw;">
+                        <a href="{{ story[2] }}" id="mylink">
+                            <div class="name">
+                                <h4 class="dark" id="dark">{{ story[0] }}</h4>
+                            </div>
+                            {{ story[1] }}
+                        </a>
                     </div>
                 {%endfor%}              
             </div>
         </div>
     </section>    
-
           <!-- Addiction Information Form -->
     <section id="addiction-form-section">
        <h3>Tell Us About Your Addiction</h3>
