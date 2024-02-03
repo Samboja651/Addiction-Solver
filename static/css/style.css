@@ -17,34 +17,37 @@
   margin-top: 0px;
   padding-bottom: 0px;
 }
-/* .user-story{
-  margin-top: 0px;
-  padding-top: 0px;
-} */
+/*---------- success stories ------------ */
+/* story */
+.user-story{
+  overflow: hidden;
+}
 
 /* user story */
 .container{
-    margin-top: 125px;
+  margin-top: 125px;
 }
-.row{
-    display: flexbox;
-    gap: 50px;
-}
-/*---------- success stories ------------ */
-/* story */
+
 .col{
     border: 2px solid black;
     border-radius: 5px;
+    /* min-width: 40%; */
 }
 /* animations */
 .row{
   overflow: hidden;
   position: relative;
   animation-name: story;
-  animation-duration: 30s;
+  animation-duration: 50s;
   animation-iteration-count: 3;
   animation-timing-function: linear;
+  animation-delay: -20s;
 }
+
+.row:hover{
+  animation-play-state: paused;
+}
+
 @keyframes story {
     from {
       left: 100%;
@@ -73,6 +76,11 @@ coloring the home page
 .success{
   background-color: var(--bs-success-bg-subtle);
 }
+.success:hover{
+  background-color: red;
+  cursor: pointer;
+}
+
 .name h4{
     color: var(--bs-success-text-emphasis);
 }
