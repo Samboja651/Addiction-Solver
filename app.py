@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import sqlite3
@@ -109,11 +109,40 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/logout', methods=['POST'])
+
+# Delete a user
+@app.route('/delete_account/<username>', methods=['GET', 'POST'])
+def delete_user(username):
+    if request.method == 'POST':
+        try:
+            user = User.query.get(username)
+
+            if user:
+                db.session.delete(user)
+                db.session.commit()
+
+                # If the user is logged in, remove the username from the session
+                if 'username' in session:
+                    session.pop('username', None)
+
+                return redirect(url_for('first_page'))
+            else:
+                # User not found, redirect to an error page or handle appropriately
+                return redirect(url_for('error_page'))
+        except Exception as e:
+            # Log the exception or handle it as appropriate for your application
+            print(f"Error deleting user: {e}")
+            db.session.rollback()  # Rollback changes to the database
+            abort(500)  # Internal Server Error
+
+    return render_template('delete_account_confirmation.html', username=username)
+
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
     # Remove the username from the session if it's there
     session.pop('username', None)
     return redirect(url_for('test_stories'))
+
 
 
 if __name__ == '__main__':
