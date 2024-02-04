@@ -56,11 +56,12 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
+        # Check if the username already exists
         existing_user = User.query.filter_by(username=username).first()
 
         if existing_user:
             flash('Username already exists. Please choose a different one.', 'danger')
-            return redirect(url_for('login'))
+            return redirect(url_for('register'))
 
         # Password conditions
         if len(password) < 8:
@@ -88,6 +89,7 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
