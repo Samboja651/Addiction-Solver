@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
+from flask import Flask, render_template, request, redirect, url_for, session, flash, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
-=======
-from flask import Flask, render_template, request, jsonify
->>>>>>> main
 import sqlite3
 
 
@@ -54,7 +50,6 @@ def home():
 
     return render_template('f_stories.html')
 
-<<<<<<< HEAD
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -149,14 +144,12 @@ def logout():
     return redirect(url_for('test_stories'))
 
 
-=======
-app = Flask(__name__)
 
 # Placeholder for storing chat messages
 peer_to_peer_chat = []
 doctor_chat = []
 
-@app.route('/')
+@app.route('/help', methods = ['GET', 'POST'])
 def help_page():
     return render_template('help.html')
 
@@ -173,7 +166,6 @@ def doctor_chat():
     message = request.form.get('message')
     doctor_chat.append(message)
     return jsonify({'messages': doctor_chat})
->>>>>>> main
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
