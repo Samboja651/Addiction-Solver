@@ -113,6 +113,41 @@ Form Styles
   
   #addiction-form-section button:hover {
     background-color: #e0e0e0; 
-  
- 
   }
+
+  /* set default margin and padding */
+body, h1, h2, ul, li {
+  margin: 0;
+  padding: 0x;
+}
+
+h2 {
+  margin-bottom: 20px; 
+}
+
+/* layout to the chat boxes */
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.forum, .personalized-chat {
+  width: 48%;
+  margin-bottom: 20px;
+}
+
+.chat-box {
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+textarea {
+  width: calc(100% - 20px);
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
