@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/delete_account_confirmation.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Delete Account</h1>
+        <form action="/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+        <br>
+        <a href="/dashboard">Go to Dashboard</a>
+    </header>
+    <main>
+        <section class="delete-account">
+            <h2>Are you sure you want to delete your account?</h2>
+            <p>Warning: This action cannot be undone!</p>
+            <form action="/delete_user{{ username }}" method="POST">
+                <button type="submit">Delete Account</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
