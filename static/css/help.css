@@ -10,9 +10,12 @@
   }
   
   /* layout to the chat boxes */
+  body {
+    background-color: gainsboro;
+  }
   .container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
   }
   
   .forum, .personalized-chat {
