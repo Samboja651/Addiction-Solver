@@ -25,11 +25,13 @@
     overflow-y: scroll;
     border: 1px solid #ccc;
     padding: 10px;
+    background-color: aliceblue;
   }
   
   textarea {
     width: calc(100% - 20px);
     margin-top: 10px;
+    background-color: antiquewhite;
   }
   
   button {
