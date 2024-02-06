@@ -30,15 +30,14 @@ def home():
 
     return render_template('f_stories.html')
 
-app = Flask(__name__)
 
  # Placeholder for storing chat messages
 peer_to_peer_chat = []
 doctor_chat = []
 
-@app.route('/')
-def help_page():
-    return render_template('help.html')
+# @app.route('/')
+# def help_page():
+#     return render_template('help.html')
 
 # Endpoint for receiving and sending peer-to-peer chat messages
 @app.route('/peer-chat', methods=['POST'])
@@ -53,6 +52,21 @@ def doctor_chat():
     message = request.form.get('message')
     doctor_chat.append(message)
     return jsonify({'messages': doctor_chat})
+
+@app.route('/help', methods=['GET'])
+def help():
+    if request.method == 'GET':
+        return render_template('platform.html')
+
+@app.route('/peer-forum', methods=['GET'])
+def peer_forum():
+    if request.method == 'GET':
+        return render_template('peer-forum.html')
+    
+@app.route('/chat-doctor', methods=['GET'])
+def chat_doctor():
+    if request.method == 'GET':
+        return render_template('chat-doctor.html')
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)

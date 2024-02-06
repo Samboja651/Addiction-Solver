@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <section id="support-system">
+        <div class="container">
+            <!-- Peer-to-Peer Forum -->
+            <div class="forum">
+                <h3>Peer-to-Peer Forum</h3>
+                <!-- Placeholder for the chat box -->
+                <div class="chat-box" id="peerToPeerChat">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <!-- Input area for sending messages -->
+                <textarea id="peerMessage" placeholder="Type your message..."></textarea>
+                <button onclick="sendPeerMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

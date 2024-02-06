@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat-doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <section id="support-system">
+        <div class="container">
+            <div class="personalized-chat">
+                <h3>Personalized Chat with Doctor</h3>
+                <!-- Placeholder for the chat box -->
+                <div class="chat-box" id="doctorChat">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <!-- Input area for sending messages -->
+                <textarea id="doctorMessage" placeholder="Type your message..."></textarea>
+                <button onclick="sendDoctorMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
