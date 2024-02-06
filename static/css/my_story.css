@@ -1,0 +1,22 @@
+body{
+    width: 600px;
+    margin: auto;
+}
+
+section{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: auto;
+    background-color: aquamarine;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h1, h4{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    /* text-decoration: underline; */
+}

@@ -64,6 +64,7 @@ def init_db():
                    user_id INTEGER,
                    user_name TEXT NOT NULL,
                    story TEXT NOT NULL,
+                   story_url TEXT NOT NULL,
                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    FOREIGN KEY (user_id) REFERENCES form_data(user_id)
     )""")
