@@ -115,20 +115,21 @@ Form Styles
     background-color: #e0e0e0; 
   }
 
-  /* set default margin and padding */
+  /* default margin and padding */
 body, h1, h2, ul, li {
   margin: 0;
-  padding: 0x;
-}
-
-h2 {
-  margin-bottom: 20px; 
+  padding: 0;
 }
 
 /* layout to the chat boxes */
 .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; 
+  align-items: center;
+}
+/* Style for the Support System title */
+h2 {
+  margin-bottom: 20px; 
 }
 
 .forum, .personalized-chat {
@@ -141,11 +142,13 @@ h2 {
   overflow-y: scroll;
   border: 1px solid #ccc;
   padding: 10px;
+  background-color: whitesmoke;
 }
 
 textarea {
   width: calc(100% - 20px);
   margin-top: 10px;
+  background-color: antiquewhite;
 }
 
 button {

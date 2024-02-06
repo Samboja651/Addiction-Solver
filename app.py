@@ -32,7 +32,7 @@ def home():
 
 app = Flask(__name__)
 
-# Placeholder for storing chat messages
+ # Placeholder for storing chat messages
 peer_to_peer_chat = []
 doctor_chat = []
 
