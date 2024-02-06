@@ -9,7 +9,7 @@
 <body>
     <div class="programs">
         <div class="peer-doctor">
-            <a href="http://127.0.0.1:8000/chat-doctor">
+            <a href="{{ url_for('chat_doctor') }}">
                 <img src="{{ url_for('static', filename='images/chat_doctor.jpg') }}" alt="chat with chat_doctor"
                 style="width: 368px; height: 295px;">
                 <p>Talk to a Doctor to help you walk the journey to your Recovery</p>
@@ -18,7 +18,7 @@
         </div>
 
         <div class="peer-peer">
-            <a href="http://127.0.0.1:8000/peer-forum">
+            <a href="{{ url_for('peer_forum') }}">
                 <img src="{{ url_for('static', filename='images/peer_forum.jpg') }}" alt="talk to peers"
                 style="width: 368px; height: 300px;">
                 <p>Experience a sense of belonging by joining the conversations of a community of like minded peers.</p>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="e-resources">
-            <a href="">
+            <a href="#">
                 <img src="{{ url_for('static', filename='images/e_resources.png') }}" alt="learning resources"
                 style="width: 368px; height: 306px;">
                 <p>Learn from resources tailored for your needs</p>
