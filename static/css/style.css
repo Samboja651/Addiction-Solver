@@ -56,7 +56,7 @@
       left: 100%;
     }
     to {
-      left: -500%;
+      left: -600%;
     }
 }
 
@@ -155,6 +155,5 @@ Form Styles
   
   #addiction-form-section button:hover {
     background-color: #e0e0e0; 
-  
- 
   }
+

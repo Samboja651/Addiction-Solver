@@ -1,4 +1,5 @@
 import sqlite3
+from app import db
 
 def init_db():
     db = sqlite3.connect('app.db')
@@ -6,7 +7,7 @@ def init_db():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS form_data (
-            user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER PRIMARY KEY,
             user_name TEXT NOT NULL,
             type_of_addiction VARCHAR(255) NOT NULL,
             duration INTEGER NOT NULL,
@@ -20,7 +21,7 @@ def init_db():
         )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS peer_forum_data (
-            message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            message_id INTEGER PRIMARY KEY,
             user_id INTEGER NOT NULL,
             message_content TEXT NOT NULL,
             phone_number VARCHAR(12) NOT NULL,
@@ -32,7 +33,7 @@ def init_db():
         )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS doctors (
-            doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            doctor_id INTEGER PRIMARY KEY,
             doctor_name TEXT NOT NULL,
             phone_number VARCHAR(12),
             email VARCHAR(255),
@@ -40,7 +41,7 @@ def init_db():
         )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS personalized_chats (
-            chat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            chat_id INTEGER PRIMARY KEY,
             user_id INTEGER NOT NULL,
             doctor_id INTEGER NOT NULL,
             message_content TEXT NOT NULL,
@@ -50,17 +51,16 @@ def init_db():
         )""")
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS educational_resources (
-            resource_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            resource_id INTEGER PRIMARY KEY,
             resource_type VARCHAR(50) NOT NULL,
             title VARCHAR(255) NOT NULL,
             description TEXT,
             link VARCHAR(255) NOT NULL,
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )""")
-                #    tags for filter
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS success_stories (
-                   story_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   story_id INTEGER PRIMARY KEY,
                    user_id INTEGER,
                    user_name TEXT NOT NULL,
                    story TEXT NOT NULL,
@@ -68,8 +68,12 @@ def init_db():
                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                    FOREIGN KEY (user_id) REFERENCES form_data(user_id)
     )""")
-                #    description
-    # table for registration include tags
+
+    cursor.execute("""CREATE TABLE IF NOT EXISTS users (
+                   id INTEGER PRIMARY KEY,
+                   username VARCHAR(80) UNIQUE NOT NULL,
+                   password VARCHAR(120) UNIQUE NOT NULL
+    )""")
 
     db.commit()
 
