@@ -1,34 +1,63 @@
+
 /* navbar items */
 .customize{
     margin: auto;
 }
-
+#navbar-1 *{
+  background-color: greenyellow;
+}
+.introduction{
+  text-align: center;
+}
+.intro-message{
+  margin: auto;
+  text-align: center;
+}
+#introduction{
+  margin-bottom: -80px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
+/*---------- success stories ------------ */
+/* story */
+.user-story{
+  overflow: hidden;
+  /* position: relative; */
+}
 
 /* user story */
 .container{
-    margin-top: 125px;
-}
-.row{
-    display: flexbox;
-    gap: 50px;
+  margin-top: 125px;
+  /* position: relative; */
 }
 
-/* story */
 .col{
     border: 2px solid black;
     border-radius: 5px;
+    /* min-width: 40%; */
 }
-/* animations */
-.col{
-    position: relative;
-    animation-name: story;
-    animation-duration: 50s;
-    animation-iteration-count: 3;
-    animation-timing-function: linear;
+/* animations 300s -50s*/
+.row{
+  overflow: hidden;
+  position: relative;
+  animation-name: story;
+  animation-duration: 300s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: -70s;
 }
+
+.row:hover{
+  animation-play-state: paused;
+}
+
 @keyframes story {
-    from {left: 100%; right: 0%;}
-    to {left: -100%; right: 0%;}
+    from {
+      left: 100%;
+    }
+    to {
+      left: -300%;
+    }
 }
 
 /* user */
@@ -38,8 +67,14 @@
     margin-left: -12px;
     border-radius: 3px;
 }
+#mylink{
+  text-decoration: none;
+}
+#mylink{
+  color: black;
+}
 
-
+/* ----------end--------------------------- */
 /* ---------------------------
 coloring the home page
 --------------------------- */
@@ -50,6 +85,12 @@ coloring the home page
 .success{
   background-color: var(--bs-success-bg-subtle);
 }
+.success:hover{
+  /* border: 5px solid burlywood; */
+  box-shadow: 0px 0px 8px 1px #4CAF50;
+  cursor: pointer;
+}
+
 .name h4{
     color: var(--bs-success-text-emphasis);
 }
@@ -62,6 +103,7 @@ coloring the home page
 /* -------------------
 Form Styles
 ------------------- */
+
 #addiction-form-section {
     max-width: 600px;
     margin: 50px auto;
@@ -88,7 +130,7 @@ Form Styles
   #addiction-form-section textarea,
   #addiction-form-section select {
     width: 100%;
-    padding: 12px;
+    padding: 7px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -114,43 +156,3 @@ Form Styles
   #addiction-form-section button:hover {
     background-color: #e0e0e0; 
   }
-
-  /* default margin and padding */
-body, h1, h2, ul, li {
-  margin: 0;
-  padding: 0;
-}
-
-/* layout to the chat boxes */
-.container {
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-}
-/* Style for the Support System title */
-h2 {
-  margin-bottom: 20px; 
-}
-
-.forum, .personalized-chat {
-  width: 48%;
-  margin-bottom: 20px;
-}
-
-.chat-box {
-  height: 200px;
-  overflow-y: scroll;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: whitesmoke;
-}
-
-textarea {
-  width: calc(100% - 20px);
-  margin-top: 10px;
-  background-color: antiquewhite;
-}
-
-button {
-  margin-top: 10px;
-}
