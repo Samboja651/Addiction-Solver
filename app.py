@@ -30,7 +30,7 @@ def home():
 
     return render_template('f_stories.html')
 
-@app.route('/educational_resources')
+@app.route('/educational_resources', methods=['GET', 'POST'])
 def educational_resources():
     books = [
         {"title": "The Biology of Desire: Why Addiction Is Not a Disease", "author": "Marc Lewis"},
