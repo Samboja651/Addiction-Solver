@@ -35,13 +35,6 @@ def home():
         cursor.execute('SELECT user_name, story, story_url FROM success_stories')
         stories = cursor.fetchall()
 
-    if request.method == 'POST':
-        required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
-        form_data = {field: request.form.get(field) for field in required_fields}
-
-        if not all(form_data.values()):
-            return "Please fill in all fields."
-
     return render_template('home.html', stories=stories)
         # return "Form submitted successfully!"
 
@@ -217,10 +210,20 @@ doctor_chat = []
 #     return jsonify({'messages': doctor_chat})
 
 # -----------code inherits operation from previous help page -------------
-@app.route('/help', methods=['GET'])
+@app.route('/help', methods=['GET', 'POST'])
 def help():
     if request.method == 'GET':
         return render_template('help_platform.html')
+    
+    if request.method == 'POST':
+        required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
+        form_data = {field: request.form.get(field) for field in required_fields}
+
+        if not all(form_data.values()):
+            return "Please fill in all fields." 
+
+        return render_template('help_platform.html') 
+          
 
 # Endpoint for receiving and sending peer-to-peer chat messages
 @app.route('/peer-forum', methods=['GET'])
