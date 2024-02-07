@@ -30,7 +30,21 @@ def home():
 
     return render_template('f_stories.html')
 
-app = Flask(__name__)
+@app.route('/educational_resources')
+def educational_resources():
+    books = [
+        {"title": "The Biology of Desire: Why Addiction Is Not a Disease", "author": "Marc Lewis"},
+        {"title": "Addiction: A Disorder of Choice", "author": "Gene M. Heyman"},
+        {"title": "Clean: Overcoming Addiction and Ending America’s Greatest Tragedy", "author": "David Sheff"}
+    ]
+
+    videos = [
+        {"title": "TED Talk: Everything You Think You Know About Addiction is Wrong", "speaker": "Johann Hari", "link": "https://www.youtube.com/watch?v=PY9DcIMGxMs"},
+        {"title": "The Opposite of Addiction is Connection", "speaker": "Johann Hari", "link": "https://www.youtube.com/watch?v=PY9DcIMGxMs"},
+        {"title": "Pleasure Unwoven: An Explanation of the Brain Disease of Addiction", "speaker": "Kevin McCauley", "link": "https://www.youtube.com/watch?v=ao8L-0nSYzg"}
+    ]
+
+    return render_template('educational_resources.html', books=books, videos=videos)
 
 # Placeholder for storing chat messages
 peer_to_peer_chat = []
