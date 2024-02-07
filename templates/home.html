@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 customize">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('help_page') }}">Help</a>
@@ -75,7 +75,7 @@
           <!-- Addiction Information Form -->
     <section id="addiction-form-section">
        <h3>Tell Us About Your Addiction</h3>
-       <form action="#" method="post" id="addiction-form">
+       <form action=" {{ url_for('help_page') }} " method="post" id="addiction-form">
           <label for="addiction-type">Type of Addiction:</label>
           <input type="text" id="addiction-type" name="addiction-type" required>
 

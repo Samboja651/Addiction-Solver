@@ -28,17 +28,13 @@ with app.app_context():
     db.create_all()
 
 @app.route('/', methods=['GET', 'POST'])
-def test_stories():
+def home():
     if request.method == 'GET':
         db = get_db()
         cursor = db.cursor()
         cursor.execute('SELECT user_name, story, story_url FROM success_stories')
         stories = cursor.fetchall()
 
-        return render_template('f_stories.html', stories=stories)
-
-@app.route('/', methods=['GET', 'POST'])
-def home():
     if request.method == 'POST':
         required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
         form_data = {field: request.form.get(field) for field in required_fields}
@@ -46,23 +42,25 @@ def home():
         if not all(form_data.values()):
             return "Please fill in all fields."
 
-        return "Form submitted successfully!"
+    return render_template('home.html', stories=stories)
+        # return "Form submitted successfully!"
 
-    return render_template('f_stories.html')
+# @app.route('/', methods=['GET', 'POST'])
+# def home():
+#     if request.method == 'POST':
+#         required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
+#         form_data = {field: request.form.get(field) for field in required_fields}
 
-# redirect to the full story based on user id
-@app.route('/<user_id>', methods=['GET', 'POST'])
-def my_story(user_id):
-    if request.method == 'GET':
-        if user_id == '1':
-            return render_template('my_story.html')
-        elif user_id == '2':
-            return render_template('my_story.html')
-        else:
-            return redirect('/')
+#         if not all(form_data.values()):
+#             return "Please fill in all fields."
+
+#         return "Form submitted successfully!"
+
+#     return render_template('home.html')
 
 
 
+# create an account
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -114,7 +112,7 @@ def login():
 
         if user and bcrypt.checkpw(password.encode('utf-8'), user.password):
             session['username'] = username
-            return redirect(url_for('test_stories', username=username))
+            return redirect(url_for('home', username=username))
 
         else:
             error_message = "Invalid credentials. Please try again."
@@ -154,7 +152,44 @@ def delete_user(username):
 def logout():
     # Remove the username from the session if it's there
     session.pop('username', None)
-    return redirect(url_for('test_stories'))
+    return redirect(url_for('home'))
+
+
+
+# redirect to the full story based on user id
+@app.route('/<user_id>/mystory/<name>', methods=['GET', 'POST'])
+def my_story(user_id, name):
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT user_id, user_name FROM success_stories')
+    ids = cursor.fetchall()
+
+    if request.method == 'GET':
+        if int (user_id) == ids[0][0]:
+            return render_template('my_story.html', username = ids[0][1])
+        elif int (user_id) == ids[1][0]:
+            return render_template('my_story.html', username = ids[1][1])
+        elif int (user_id) == ids[2][0]:
+            return render_template('my_story.html', username = ids[2][1])
+        elif int (user_id) == ids[3][0]:
+            return render_template('my_story.html', username = ids[3][1])
+        elif int (user_id) == ids[4][0]:
+            return render_template('my_story.html', username = ids[4][1])
+        elif int (user_id) == ids[5][0]:
+            return render_template('my_story.html', username = ids[5][1])
+        elif int (user_id) == ids[6][0]:
+            return render_template('my_story.html', username = ids[6][1])
+        elif int (user_id) == ids[7][0]:
+            return render_template('my_story.html', username = ids[7][1])
+        elif int (user_id) == ids[8][0]:
+            return render_template('my_story.html', username = ids[8][1])
+        elif int (user_id) == ids[9][0]:
+            return render_template('my_story.html', username = ids[9][1])
+        elif int (user_id) == ids[10][0]:
+            return render_template('my_story.html', username = ids[10][1])
+        else:
+            return redirect('/')
+
 
 
 
@@ -179,6 +214,8 @@ def doctor_chat():
     message = request.form.get('message')
     doctor_chat.append(message)
     return jsonify({'messages': doctor_chat})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

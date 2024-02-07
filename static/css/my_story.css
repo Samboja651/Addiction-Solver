@@ -1,11 +1,12 @@
 body{
     width: 600px;
     margin: auto;
+    background-color: lightgray;
 }
 
 section{
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content; */
+    /* height: fit-content; */
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -15,8 +16,18 @@ section{
     padding-right: 10px;
 }
 
+section{
+    margin-top: 30px;
+    border: 2px solid aquamarine;
+    border-radius: 10px;
+}
+
 h1, h4{
     text-align: center;
     font-family: 'Roboto', sans-serif;
     /* text-decoration: underline; */
+}
+h1, h4, p{
+    padding: 0px;
+    margin: 12px;
 }
