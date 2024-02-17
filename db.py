@@ -75,6 +75,17 @@ def init_db():
                    password VARCHAR(120) UNIQUE NOT NULL
     )""")
 
+    # Create the messages table
+    cursor.execute("""CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY,
+            user TEXT NOT NULL,
+            message TEXT NOT NULL,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )""")
+
     db.commit()
 
 init_db()
+
+
+

@@ -3,25 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>chat-doctor</title>
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+    <title>Chat with Doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .chat-box {
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            clear: both;
+            overflow-wrap: break-word;
+            position: relative;
+        }
+        .user-message {
+            background-color: #dcf8c6;
+            float: right;
+        }
+        .doctor-message {
+            background-color: #e5e5ea;
+            float: left;
+        }
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
     <section id="support-system">
         <div class="container">
             <div class="personalized-chat">
                 <h3>Personalized Chat with Doctor</h3>
-                <!-- Placeholder for the chat box -->
                 <div class="chat-box" id="doctorChat">
                     <!-- Chat messages will be dynamically loaded here -->
                 </div>
-                <!-- Input area for sending messages -->
-                <textarea id="doctorMessage" placeholder="Type your message..."></textarea>
-                <button onclick="sendDoctorMessage()">Send</button>
+                <div class="input-area">
+                    <textarea id="doctorMessage" placeholder="Type your message..."></textarea>
+                    <button onclick="sendDoctorMessage()">Send</button>
+                </div>
             </div>
         </div>
     </section>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('receive_message', function(data) {
+            var messageClass = (data.user === 'Doctor') ? 'doctor-message' : 'user-message';
+            var messageHTML = '<div class="message ' + messageClass + '" data-id="' + data.id + '">' +
+                                  '<span class="delete-button" onclick="deleteMessage(this)">❌</span>' +
+                                  '<p>' + data.message + '</p>' +
+                              '</div>';
+            $('#doctorChat').append(messageHTML);
+            // Scroll to bottom of chat box
+            $('#doctorChat').scrollTop($('#doctorChat')[0].scrollHeight);
+        });
+
+        socket.on('delete_message', function(id) {
+            $('[data-id="' + id + '"]').remove();
+        });
+
+        function sendDoctorMessage() {
+            var message = $('#doctorMessage').val().trim();
+            if (message !== '') {
+                socket.emit('send_message', { message: message });
+                var messageHTML = '<div class="message user-message">' +
+                                      '<span class="delete-button" onclick="deleteMessage(this)">❌</span>' +
+                                      '<p>' + message + '</p>' +
+                                  '</div>';
+                $('#doctorChat').append(messageHTML);
+                // Scroll to bottom of chat box
+                $('#doctorChat').scrollTop($('#doctorChat')[0].scrollHeight);
+                $('#doctorMessage').val('');
+            }
+        }
+
+        function deleteMessage(element) {
+            var messageId = $(element).parent().data('id');
+            socket.emit('delete_message', messageId);
+        }
+    </script>
 </body>
 </html>
