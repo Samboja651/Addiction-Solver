@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.container2 {
+    width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: greenyellow;
+    color: black;
+    padding: 20px 0;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+main {
+    background-color: #f9f9f9;
+    padding: 20px 0;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.article, .video {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.social-media img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.filter-btn {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.filter-btn:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .filter-btn {
+    padding: 10px 30px;
+  }
+}
