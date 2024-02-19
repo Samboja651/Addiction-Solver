@@ -6,10 +6,18 @@ body {
 .container {
     width: 90%;
     margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.container2 {
+    width: 90%;
+    margin: 0 auto;
 }
 
 header {
-    background-color: #333;
+    background-color: #4CAF50;
     color: #fff;
     padding: 20px 0;
 }
