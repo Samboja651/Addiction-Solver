@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
-# import bcrypt
+import bcrypt
 import sqlite3
 
 
@@ -34,6 +34,12 @@ def home():
         cursor = db.cursor()
         cursor.execute('SELECT user_name, story, story_url FROM success_stories')
         stories = cursor.fetchall()
+        cursor.execute('SELECT user_id FROM success_stories')
+        storyid = cursor.fetchall()
+        for id in storyid:
+            print(type(id[0]))
+
+        print(storyid)
 
     return render_template('home.html', stories=stories)
         # return "Form submitted successfully!"
@@ -136,38 +142,43 @@ def logout():
 
 
 # redirect to the full story based on user id
-@app.route('/<user_id>/mystory/<name>', methods=['GET', 'POST'])
-def my_story(user_id, name):
+@app.route('/mystory/<id>', methods=['GET', 'POST'])
+def my_story(user_id):
+    base_url = 'http://localhost:8000/mystory/'
     db = get_db()
     cursor = db.cursor()
-    cursor.execute('SELECT user_id, user_name FROM success_stories')
-    ids = cursor.fetchall()
+    cursor.execute('SELECT user_id FROM success_stories')
+    storyid = cursor.fetchall()
 
-    if request.method == 'GET':
-        if int (user_id) == ids[0][0]:
-            return render_template('my_story.html', username = ids[0][1])
-        elif int (user_id) == ids[1][0]:
-            return render_template('my_story.html', username = ids[1][1])
-        elif int (user_id) == ids[2][0]:
-            return render_template('my_story.html', username = ids[2][1])
-        elif int (user_id) == ids[3][0]:
-            return render_template('my_story.html', username = ids[3][1])
-        elif int (user_id) == ids[4][0]:
-            return render_template('my_story.html', username = ids[4][1])
-        elif int (user_id) == ids[5][0]:
-            return render_template('my_story.html', username = ids[5][1])
-        elif int (user_id) == ids[6][0]:
-            return render_template('my_story.html', username = ids[6][1])
-        elif int (user_id) == ids[7][0]:
-            return render_template('my_story.html', username = ids[7][1])
-        elif int (user_id) == ids[8][0]:
-            return render_template('my_story.html', username = ids[8][1])
-        elif int (user_id) == ids[9][0]:
-            return render_template('my_story.html', username = ids[9][1])
-        elif int (user_id) == ids[10][0]:
-            return render_template('my_story.html', username = ids[10][1])
-        else:
-            return redirect('/')
+    for id in storyid:
+        if str(id[0]) == user_id:
+            base_url += str(id[0])
+            return render_template('my_story.html')
+    # if request.method == 'GET':
+    #     if int (user_id) == ids[0][0]:
+    #         return render_template('my_story.html', username = ids[0][1])
+    #     elif int (user_id) == ids[1][0]:
+    #         return render_template('my_story.html', username = ids[1][1])
+    #     elif int (user_id) == ids[2][0]:
+    #         return render_template('my_story.html', username = ids[2][1])
+    #     elif int (user_id) == ids[3][0]:
+    #         return render_template('my_story.html', username = ids[3][1])
+    #     elif int (user_id) == ids[4][0]:
+    #         return render_template('my_story.html', username = ids[4][1])
+    #     elif int (user_id) == ids[5][0]:
+    #         return render_template('my_story.html', username = ids[5][1])
+    #     elif int (user_id) == ids[6][0]:
+    #         return render_template('my_story.html', username = ids[6][1])
+    #     elif int (user_id) == ids[7][0]:
+    #         return render_template('my_story.html', username = ids[7][1])
+    #     elif int (user_id) == ids[8][0]:
+    #         return render_template('my_story.html', username = ids[8][1])
+    #     elif int (user_id) == ids[9][0]:
+    #         return render_template('my_story.html', username = ids[9][1])
+    #     elif int (user_id) == ids[10][0]:
+    #         return render_template('my_story.html', username = ids[10][1])
+    #     else:
+    #         return redirect('/')
 
 
 
@@ -242,4 +253,4 @@ def chat_doctor():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=3000)
