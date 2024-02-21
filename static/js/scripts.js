@@ -35,4 +35,43 @@ document.addEventListener("DOMContentLoaded", function() {
             filterVideos(category);
         });
     });
+
+
+    function searchResources(query) {
+        const searchRegex = new RegExp(query.trim(), "i");
+
+        articles.forEach(article => {
+            const articleContent = article.textContent.toLowerCase();
+            if (searchRegex.test(articleContent)) {
+                article.style.display = "block";
+            } else {
+                article.style.display = "none";
+            }
+        });
+
+        videos.forEach(video => {
+            const videoContent = video.textContent.toLowerCase();
+            if (searchRegex.test(videoContent)) {
+                video.style.display = "block";
+            } else {
+                video.style.display = "none";
+            }
+        });
+    }
+
+    // Event listener for search button
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", function() {
+        const searchInput = document.getElementById("search-input").value;
+        searchResources(searchInput);
+    });
+
+    // Optional: Trigger search on pressing Enter key
+    const searchInput = document.getElementById("search-input");
+    searchInput.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            const searchInputValue = searchInput.value;
+            searchResources(searchInputValue);
+        }
+    });
 });
