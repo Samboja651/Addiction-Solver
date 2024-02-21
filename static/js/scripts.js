@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const articles = document.querySelectorAll(".article");
     const videos = document.querySelectorAll(".video");
 
-    // Function to show/hide articles based on category
     function filterArticles(category) {
         articles.forEach(article => {
             const articleCategory = article.dataset.category.toLowerCase();
@@ -14,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Function to show/hide videos based on category
     function filterVideos(category) {
         videos.forEach(video => {
             const videoCategory = video.dataset.category.toLowerCase();
@@ -26,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Event listener for filter buttons
     const filterButtons = document.querySelectorAll(".filter-btn");
     filterButtons.forEach(btn => {
         btn.addEventListener("click", function() {
@@ -59,14 +56,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Event listener for search button
     const searchButton = document.getElementById("search-button");
     searchButton.addEventListener("click", function() {
         const searchInput = document.getElementById("search-input").value;
         searchResources(searchInput);
     });
 
-    // Optional: Trigger search on pressing Enter key
     const searchInput = document.getElementById("search-input");
     searchInput.addEventListener("keyup", function(event) {
         if (event.key === "Enter") {
