@@ -12,7 +12,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
                     </li>
-                    {% if status == "logged" %}
+                    {% if request.args.get('username') != None %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('help') }}">Help</a>
                     </li>

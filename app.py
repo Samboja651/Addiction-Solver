@@ -92,7 +92,7 @@ def login():
         print(user)
         if user and bcrypt.checkpw(password.encode('utf-8'), user.password):
             session['username'] = username
-            return redirect(url_for('home', username=username, status='logged'))
+            return redirect(url_for('home', username=username))
 
         else:
             error_message = "Invalid credentials. Please try again."
