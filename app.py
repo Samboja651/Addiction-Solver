@@ -34,12 +34,6 @@ def home():
         cursor = db.cursor()
         cursor.execute('SELECT user_name, story, story_url FROM success_stories')
         stories = cursor.fetchall()
-        cursor.execute('SELECT user_id FROM success_stories')
-        storyid = cursor.fetchall()
-        for id in storyid:
-            print(type(id[0]))
-
-        print(storyid)
 
     return render_template('home.html', stories=stories)
         # return "Form submitted successfully!"
@@ -142,44 +136,19 @@ def logout():
 
 
 # redirect to the full story based on user id
-@app.route('/mystory/<id>', methods=['GET', 'POST'])
-def my_story(user_id):
-    base_url = 'http://localhost:8000/mystory/'
+@app.route('/<id>', methods=['GET', 'POST'])
+def my_story(id):
+    base_url = 'http://localhost:8000/'
     db = get_db()
     cursor = db.cursor()
     cursor.execute('SELECT user_id FROM success_stories')
     storyid = cursor.fetchall()
 
-    for id in storyid:
-        if str(id[0]) == user_id:
+    for ids in storyid:
+        if str(ids[0]) == id:
             base_url += str(id[0])
             return render_template('my_story.html')
-    # if request.method == 'GET':
-    #     if int (user_id) == ids[0][0]:
-    #         return render_template('my_story.html', username = ids[0][1])
-    #     elif int (user_id) == ids[1][0]:
-    #         return render_template('my_story.html', username = ids[1][1])
-    #     elif int (user_id) == ids[2][0]:
-    #         return render_template('my_story.html', username = ids[2][1])
-    #     elif int (user_id) == ids[3][0]:
-    #         return render_template('my_story.html', username = ids[3][1])
-    #     elif int (user_id) == ids[4][0]:
-    #         return render_template('my_story.html', username = ids[4][1])
-    #     elif int (user_id) == ids[5][0]:
-    #         return render_template('my_story.html', username = ids[5][1])
-    #     elif int (user_id) == ids[6][0]:
-    #         return render_template('my_story.html', username = ids[6][1])
-    #     elif int (user_id) == ids[7][0]:
-    #         return render_template('my_story.html', username = ids[7][1])
-    #     elif int (user_id) == ids[8][0]:
-    #         return render_template('my_story.html', username = ids[8][1])
-    #     elif int (user_id) == ids[9][0]:
-    #         return render_template('my_story.html', username = ids[9][1])
-    #     elif int (user_id) == ids[10][0]:
-    #         return render_template('my_story.html', username = ids[10][1])
-    #     else:
-    #         return redirect('/')
-
+    
 
 
 
