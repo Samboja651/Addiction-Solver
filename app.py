@@ -11,8 +11,8 @@ app.secret_key = 'secret_key'
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
+    __tablename__ = 'user'
+    user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     points = db.Column(db.Integer, default=0)
@@ -37,19 +37,6 @@ def home():
 
     return render_template('home.html', stories=stories)
         # return "Form submitted successfully!"
-
-# @app.route('/', methods=['GET', 'POST'])
-# def home():
-#     if request.method == 'POST':
-#         required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
-#         form_data = {field: request.form.get(field) for field in required_fields}
-
-#         if not all(form_data.values()):
-#             return "Please fill in all fields."
-
-#         return "Form submitted successfully!"
-
-#     return render_template('home.html')
 
 
 
@@ -102,7 +89,6 @@ def login():
         password = request.form['password']
 
         user = User.query.filter_by(username=username).first()
-
         if user and bcrypt.checkpw(password.encode('utf-8'), user.password):
             session['username'] = username
             return redirect(url_for('home', username=username))
@@ -190,24 +176,6 @@ def my_story(user_id, name):
 peer_to_peer_chat = []
 doctor_chat = []
 
-# --------------below code was for previous help page----------------
-# @app.route('/help', methods = ['GET', 'POST'])
-# def help():
-#     return render_template('help.html')
-
-# # Endpoint for receiving and sending peer-to-peer chat messages
-# @app.route('/peer-chat', methods=['POST'])
-# def peer_chat():
-    # message = request.form.get('message')
-    # peer_to_peer_chat.append(message)
-    # return jsonify({'messages': peer_to_peer_chat})
-
-# # Endpoint for receiving and sending doctor chat messages
-# @app.route('/doctor-chat', methods=['POST'])
-# def doctor_chat():
-#     message = request.form.get('message')
-#     doctor_chat.append(message)
-#     return jsonify({'messages': doctor_chat})
 
 # -----------code inherits operation from previous help page -------------
 @app.route('/help', methods=['GET', 'POST'])
@@ -218,9 +186,27 @@ def help():
     if request.method == 'POST':
         required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
         form_data = {field: request.form.get(field) for field in required_fields}
+        data = list(form_data.values())
 
         if not all(form_data.values()):
             return "Please fill in all fields." 
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        # get the logged in user's id
+        stmid = 'SELECT user_id FROM user ORDER BY user_id DESC'
+        # .fetchone returns a tuple like (3,) so to get the int itself i use indexing
+        user_id = cursor.execute(stmid).fetchone()[0]
+        # now add the user_id to the list of data to be inserted into db
+        data.append(user_id)
+
+        stm = 'INSERT INTO addiction_data (addiction_type, duration, cause, severity, age, gender, user_id) VALUES(?, ?, ?, ?, ?, ?, ?)'
+        cursor.execute(stm, data)
+
+        # print(data)
+        conn.commit()
+        conn.close()
 
         return render_template('help_platform.html') 
     
@@ -256,4 +242,4 @@ def chat_doctor():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=5000)

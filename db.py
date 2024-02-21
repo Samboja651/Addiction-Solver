@@ -5,20 +5,28 @@ def init_db():
     db = sqlite3.connect('app.db')
     cursor = db.cursor()
 
+    cursor.execute("""CREATE TABLE IF NOT EXISTS user (
+                   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   username VARCHAR(80) UNIQUE NOT NULL,
+                   password VARCHAR(120) UNIQUE NOT NULL
+    )""")
+
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS form_data (
-            user_id INTEGER PRIMARY KEY,
-            user_name TEXT NOT NULL,
-            type_of_addiction VARCHAR(255) NOT NULL,
+        CREATE TABLE IF NOT EXISTS addiction_data (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            addiction_type VARCHAR(255) NOT NULL,
             duration INTEGER NOT NULL,
-            possible_cause VARCHAR(255),
+            cause VARCHAR(255),
             severity INTEGER NOT NULL,
             age INTEGER NOT NULL,
             gender VARCHAR(10) NOT NULL,
-            phone_number VARCHAR(12) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            submission_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            user_id INTEGER UNIQUE NOT NULL,
+            submission_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES user(user_id)
         )""")
+            # user_name TEXT NOT NULL,
+            # phone_number VARCHAR(12) NOT NULL,
+            # email VARCHAR(255) NOT NULL,
 
     cursor.execute("""CREATE TABLE IF NOT EXISTS peer_forum_data (
             message_id INTEGER PRIMARY KEY,
@@ -69,11 +77,6 @@ def init_db():
                    FOREIGN KEY (user_id) REFERENCES form_data(user_id)
     )""")
 
-    cursor.execute("""CREATE TABLE IF NOT EXISTS users (
-                   id INTEGER PRIMARY KEY,
-                   username VARCHAR(80) UNIQUE NOT NULL,
-                   password VARCHAR(120) UNIQUE NOT NULL
-    )""")
 
     db.commit()
 
