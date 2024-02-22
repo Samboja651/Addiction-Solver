@@ -5,10 +5,11 @@ import sqlite3
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_credentials.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.secret_key = 'secret_key'
 
 db = SQLAlchemy(app)
+   
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -193,21 +194,17 @@ def my_story(user_id, name):
 
 
 
- # Placeholder for storing chat messages
+#  # Placeholder for storing chat messages
 peer_to_peer_chat = []
 doctor_chat = []
 
-# --------------below code was for previous help page----------------
-# @app.route('/help', methods = ['GET', 'POST'])
-# def help():
-#     return render_template('help.html')
 
-# # Endpoint for receiving and sending peer-to-peer chat messages
+# Endpoint for receiving and sending peer-to-peer chat messages
 # @app.route('/peer-chat', methods=['POST'])
 # def peer_chat():
-    # message = request.form.get('message')
-    # peer_to_peer_chat.append(message)
-    # return jsonify({'messages': peer_to_peer_chat})
+#     message = request.form.get('message')
+#     peer_to_peer_chat.append(message)
+#     return jsonify({'messages': peer_to_peer_chat})
 
 # # Endpoint for receiving and sending doctor chat messages
 # @app.route('/doctor-chat', methods=['POST'])
@@ -216,7 +213,41 @@ doctor_chat = []
 #     doctor_chat.append(message)
 #     return jsonify({'messages': doctor_chat})
 
-# -----------code inherits operation from previous help page -------------
+
+
+@app.route('/peer-chat', methods=['POST'])
+def peer_chat():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    message = request.form.get('message')
+    sender = session['username']
+
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO chat_messages (sender, message) VALUES (?, ?)', (sender, message))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'status': 'success'})
+
+@app.route('/doctor-chat', methods=['POST'])
+def doctor_chat():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
+    content = request.form.get('message')
+    user = session['username']
+
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO messages (content, user) VALUES (?, ?)', (content, user))
+    conn.commit()
+    conn.close()
+
+    return jsonify({'status': 'success'})
+
+
 @app.route('/help', methods=['GET'])
 def help():
     if request.method == 'GET':
@@ -232,6 +263,47 @@ def peer_forum():
 def chat_doctor():
     if request.method == 'GET':
         return render_template('chat-doctor.html')
+
+def connect_db():
+    return sqlite3.connect('app.db')
+
+
+# # Function to add a new message to the messages table
+# def add_message(content):
+#     # try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('INSERT INTO messages (content) VALUES (?)', (content,))
+#         conn.commit()
+#         conn.close()
+#     #     print("Message added successfully.")
+#     # except sqlite3.Error as e:
+#     #     print("Error adding message:", e)
+
+# # Function to delete a message from the messages table
+# def delete_message(message_id):
+#     # try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('DELETE FROM messages WHERE id = ?', (message_id,))
+#         conn.commit()
+#         conn.close()
+#     #     print("Message deleted successfully.")
+#     # except sqlite3.Error as e:
+#     #     print("Error deleting message:", e)
+
+# # Function to retrieve all messages from the messages table
+# def get_messages():
+#     try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('SELECT * FROM messages')
+#         messages = cursor.fetchall()
+#         conn.close()
+#         return messages
+#     except sqlite3.Error as e:
+#         print("Error retrieving messages:", e)
+#         return []
 
 
 if __name__ == '__main__':

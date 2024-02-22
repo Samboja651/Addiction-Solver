@@ -50,3 +50,21 @@ function fetchMessages() {
 
 // Call the fetchMessages function periodically to update the chat
 setInterval(fetchMessages, 1000); // Fetch messages every second (adjust as needed)
+
+
+// Send delete request to server
+function deleteMessage(messageId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/delete-message', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Message deleted successfully, update UI if needed
+            } else {
+                // Handle error
+            }
+        }
+    };
+    xhr.send(JSON.stringify({ messageId: messageId }));
+}
