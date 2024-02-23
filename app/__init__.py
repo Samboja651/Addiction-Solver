@@ -1,6 +1,11 @@
-import os   # will use to create files
+import os
 
+from . import auth   # will use to create files
+from . import db
 from flask import Flask
+from . import home, help  # import blueprint
+ 
+
 
 def create_app(test_config = None):
     # create and configure the app
@@ -29,5 +34,13 @@ def create_app(test_config = None):
     def hello():
         return 'Hello, World!'
     
+
+    db.init_app(app)        # to initialize db run flask --app app init-db
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(home.bp)
+    app.add_url_rule('/', endpoint='home')
+    app.register_blueprint(help.bp)
+
     return app
-# running the app - flask --app app run --debug
+
+# running the app -      flask --app app run --debug

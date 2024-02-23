@@ -14,7 +14,7 @@
     <section>
         <div class="programs" style="margin-top: 150px;">
             <div class="peer-doctor">
-                <a href="{{ url_for('chat_doctor') }}">
+                <a href="{{ url_for('help.chat_doctor') }}">
                     <img src="{{ url_for('static', filename='images/chat_doctor.jpg') }}" alt="chat with chat_doctor"
                     style="width: 368px; height: 295px;">
                     <p>Talk to a Doctor to help you walk the journey to your Recovery</p>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="peer-peer">
-                <a href="{{ url_for('peer_forum') }}">
+                <a href="{{ url_for('help.peer_forum') }}">
                     <img src="{{ url_for('static', filename='images/peer_forum.jpg') }}" alt="talk to peers"
                     style="width: 368px; height: 300px;">
                     <p>Experience a sense of belonging by joining the community conversations</p>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="e-resources">
-                <a href="{{ url_for('educational_resources') }}">
+                <a href="{{ url_for('help.e_resources') }}">
                     <img src="{{ url_for('static', filename='images/e_resources.png') }}" alt="learning resources"
                     style="width: 368px; height: 306px;">
                     <p>Learn from resources designed specifically for your needs</p>
