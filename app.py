@@ -268,42 +268,42 @@ def connect_db():
     return sqlite3.connect('app.db')
 
 
-# # Function to add a new message to the messages table
-# def add_message(content):
-#     # try:
-#         conn = connect_db()
-#         cursor = conn.cursor()
-#         cursor.execute('INSERT INTO messages (content) VALUES (?)', (content,))
-#         conn.commit()
-#         conn.close()
-#     #     print("Message added successfully.")
-#     # except sqlite3.Error as e:
-#     #     print("Error adding message:", e)
+# Function to add a new message to the messages table
+def add_message(content):
+    # try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO messages (content) VALUES (?)', (content,))
+        conn.commit()
+        conn.close()
+    #     print("Message added successfully.")
+    # except sqlite3.Error as e:
+    #     print("Error adding message:", e)
 
-# # Function to delete a message from the messages table
-# def delete_message(message_id):
-#     # try:
-#         conn = connect_db()
-#         cursor = conn.cursor()
-#         cursor.execute('DELETE FROM messages WHERE id = ?', (message_id,))
-#         conn.commit()
-#         conn.close()
-#     #     print("Message deleted successfully.")
-#     # except sqlite3.Error as e:
-#     #     print("Error deleting message:", e)
+# Function to delete a message from the messages table
+def delete_message(message_id):
+    # try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM messages WHERE id = ?', (message_id,))
+        conn.commit()
+        conn.close()
+    #     print("Message deleted successfully.")
+    # except sqlite3.Error as e:
+    #     print("Error deleting message:", e)
 
-# # Function to retrieve all messages from the messages table
-# def get_messages():
-#     try:
-#         conn = connect_db()
-#         cursor = conn.cursor()
-#         cursor.execute('SELECT * FROM messages')
-#         messages = cursor.fetchall()
-#         conn.close()
-#         return messages
-#     except sqlite3.Error as e:
-#         print("Error retrieving messages:", e)
-#         return []
+# Function to retrieve all messages from the messages table
+def get_messages():
+    try:
+        conn = connect_db()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM messages')
+        messages = cursor.fetchall()
+        conn.close()
+        return messages
+    except sqlite3.Error as e:
+        print("Error retrieving messages:", e)
+        return []
 
 
 if __name__ == '__main__':
