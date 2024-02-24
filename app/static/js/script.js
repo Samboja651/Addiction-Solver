@@ -19,7 +19,6 @@ document.getElementById('addiction-form-section').addEventListener('submit', fun
     }
 });
 
-
 // Function to send a message in the peer-to-peer forum
 function sendPeerMessage() {
     const message = document.getElementById('peerMessage').value;
@@ -44,4 +43,17 @@ function appendMessage(chatBoxId, message) {
     chatBox.appendChild(messageElement);
     // Scroll to the bottom of the chat box
     chatBox.scrollTop = chatBox.scrollHeight;
-}
+};
+
+// -----!J3Qgvj9rP4Cx7c-----------------------------------------
+
+let initformBtn = document.getElementById('form-init-btn');
+let addictionForm = document.getElementById('addiction-form-section');
+console.log(initformBtn);
+console.log(addictionForm);
+
+initformBtn.addEventListener('click', ()=>{
+    addictionForm.style.display = 'block';
+    addictionForm.style.marginTop = '-10%'
+})
+

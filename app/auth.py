@@ -1,7 +1,7 @@
 import functools
 
 from flask import(
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, abort
 )
 
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -28,11 +28,33 @@ def register():
         # below part is confusing
         if error is None:
             try:
+                if len(password) < 8:
+                    flash('Password must be at least 8 characters long.', 'danger')
+                    return redirect(url_for('auth.register'))  
+                
+                elif not any(char.isupper() for char in password):
+                    flash('Password must contain at least one uppercase letter.', 'danger')
+                    return redirect(url_for('auth.register'))
+                
+                elif not any(char.islower() for char in password):
+                    flash('Password must contain at least one lowercase letter.', 'danger')
+                    return redirect(url_for('auth.register'))
+                
+                elif not any(char.isdigit() for char in password):
+                    flash('Password must contain at least one numeric digit.', 'danger')
+                    return redirect(url_for('auth.register'))
+                
+                elif not any(char.isalnum() or char in '!@#$%^&*()-_=+[]{}|;:\'",.<>?/`~' for char in password):
+                    flash('Password must contain at least one special character.', 'danger')
+                    return redirect(url_for('auth.register'))
+
+
                 db.execute("INSERT INTO user (username, password) VALUES(?, ?)",
                 (username, generate_password_hash(password)),)
                 db.commit()
             
-                return redirect(url_for("auth.login"))    
+                return redirect(url_for("auth.login"))   
+             
             except db.IntegrityError:
                 error = f"User {username} is already registered"
             
@@ -69,6 +91,15 @@ def login():
     return render_template('auth/login.html')
 
 
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+  
+    return redirect(url_for('home'))
+
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -79,12 +110,6 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE user_id = ?', (user_id,)
         ).fetchone()
-
-
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('home'))
 
 
 # ensure users are logged in for some resources

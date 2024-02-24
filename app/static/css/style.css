@@ -100,11 +100,52 @@ coloring the home page
 }
 
 
+/* user action */
+.to-recovery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+
+.to-recovery{
+  margin-bottom: 10%;
+}
+/* home banner */
+.banner, img{
+  overflow-y: hidden;
+  display: flex;
+  /* border: 2px solid black; */
+  margin-top: 2%;
+  flex-shrink: 2;
+}
+
+/* form button initializer */
+#form-init-btn{
+  display: flex;
+  flex-shrink: 1;
+  margin-top: 7%;
+  font-weight: bold;
+  color: green;
+  width: 300px;
+  font-size: 30px;
+  text-align: center;
+  border: none;
+}
+#form-init-btn:hover{
+  cursor: pointer;
+  color: black;
+  background-color: lightgreen;
+}
+
+
+
 /* -------------------
 Form Styles
 ------------------- */
 
 #addiction-form-section {
+    display: none;
     max-width: 600px;
     margin: 50px auto;
     padding: 30px;
