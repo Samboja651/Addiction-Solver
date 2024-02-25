@@ -13,8 +13,7 @@
                     {% if g.user %}
                         <!-- only for logged in user -->
                         <!-- user name -->
-                        <li><span>{{ g.user['username'] }}</span></li>
-
+                        
                         <!-- help -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('help.platform') }}">Help</a>
@@ -24,7 +23,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                         </li>
-
+                        
+                        <li style="margin-left: 200px; margin-top: 7px; font-size: 20px; font-weight: bolder;">{{ g.user['username'].upper() }}</li>
                     {% else %}
                         <!-- show this for non logged in user -->
                         <!-- home -->

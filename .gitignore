@@ -5,8 +5,8 @@ __pycache__/
 
 tests
 app.db
-app.py
-
+# app.py
+# documentation.txt
 
 # C extensions
 *.so

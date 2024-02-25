@@ -18,6 +18,17 @@
   margin-top: 0px;
   padding-bottom: 0px;
 }
+
+.intro-body{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  font-size: 20px;
+  font-weight: 300;
+  
+}
+
 /*---------- success stories ------------ */
 /* story */
 .user-story{
@@ -119,6 +130,8 @@ coloring the home page
   margin-top: 2%;
   flex-shrink: 2;
 }
+
+
 
 /* form button initializer */
 #form-init-btn{
