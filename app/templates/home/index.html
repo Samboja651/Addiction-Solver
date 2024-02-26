@@ -18,8 +18,8 @@
                 <!-- class="intro-message" -->
                 <p>Are you someone struggling with addiction? </p>
                 <p>Take a breather cause you just found your solution.</p> 
-                <p>This application grants you the tools to <span style="color: green; font-weight: bold;">Conquer the struggle</span>.</p> 
-                <p style="color: green; font-weight: 500;">Build a healthier, more fulfilling life.</p>
+                <p>This application grants you the tools to <span style="color: green; font-weight: bold;">Conquer the struggles</span>.</p> 
+                <p style="color: green; font-weight: 500;">Live a healthier, more fulfilling life.</p>
             </div>
         </div>
     </section>
@@ -49,46 +49,52 @@
         </div>
 
         {% if g.user %}
-            <button type="button" id="form-init-btn">Let us Help you</button>
+            <button type="button" id="form-init-btn">Click to Start the Journey</button>
         {% endif %}
     </section>
 
 
     <!-- Addiction Information Form -->
-    <section id="addiction-form-section">
-        <h3>Tell Us About Your Addiction</h3>
+    <section class="open-up d-flex flex-wrap" >
+        <h3 id="quote-1" class="p-2 flex-shrink-1 align-self-center">Opening up is always the first step to Recovery</h3>
         
-        <form method="POST" id="addiction-form">
-           <label for="addiction-type">Type of Addiction:</label>
-           <input type="text" id="addiction-type" name="addiction-type" required>
- 
-           <label for="duration">Time Duration of Addiction (in months):</label>
-           <input type="number" id="duration" name="duration" required>
- 
-           <label for="cause">Possible Cause of Addiction:</label>
-           <textarea id="cause" name="cause" rows="4" required></textarea>
- 
-           <label for="severity">Severity of Addiction:</label>
-           <select id="severity" name="severity" required>
-             <option value="blank"></option>
-              <option value="mild">Mild</option>
-              <option value="moderate">Moderate</option>
-              <option value="severe">Severe</option>
-           </select>
- 
-           <label for="age">Age:</label>
-           <input type="number" id="age" name="age" required>
- 
-           <label for="gender">Gender:</label>
-           <select id="gender" name="gender" required>
-             <option value="blank"></option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-           </select>
- 
-           <button type="submit">Submit</button>
-        </form>
+        <div id="addiction-form-section" class="p-2 w-100">
+            <h3>Tell Us About Your Addiction</h3>
+        
+            <form method="POST" id="addiction-form">
+            <label for="addiction-type">Type of Addiction:</label>
+            <input type="text" id="addiction-type" name="addiction-type" required>
+    
+            <label for="duration">Time Duration of Addiction (in months):</label>
+            <input type="number" id="duration" name="duration" required>
+    
+            <label for="cause">Possible Cause of Addiction:</label>
+            <textarea id="cause" name="cause" rows="4" required></textarea>
+    
+            <label for="severity">Severity of Addiction:</label>
+            <select id="severity" name="severity" required>
+                <option value="blank"></option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+    
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+    
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="blank"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+    
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <h3 id="quote-2" class="p-2 flex-shrink-1 align-self-center">You are not weak for struggling. You are strong for continuing to fight.</h3>
      </section>    
 
     

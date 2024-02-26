@@ -135,13 +135,13 @@ coloring the home page
 
 /* form button initializer */
 #form-init-btn{
-  display: flex;
+  /* display: flex; */
   flex-shrink: 1;
   margin-top: 7%;
   font-weight: bold;
   color: green;
   width: 300px;
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   border: none;
 }
@@ -150,7 +150,11 @@ coloring the home page
   color: black;
   background-color: lightgreen;
 }
-
+#quote-1, #quote-2{
+  display: none;
+  width: 30%;
+  /* margin: auto; */
+}
 
 
 /* -------------------
@@ -160,7 +164,7 @@ Form Styles
 #addiction-form-section {
     display: none;
     max-width: 600px;
-    margin: 50px auto;
+    margin: 40px auto;
     padding: 30px;
     background-color: #4CAF50; 
     border-radius: 10px;

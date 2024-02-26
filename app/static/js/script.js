@@ -45,15 +45,20 @@ function appendMessage(chatBoxId, message) {
     chatBox.scrollTop = chatBox.scrollHeight;
 };
 
-// -----!J3Qgvj9rP4Cx7c-----------------------------------------
+// ----------------------------------------------
 
 let initformBtn = document.getElementById('form-init-btn');
 let addictionForm = document.getElementById('addiction-form-section');
-console.log(initformBtn);
-console.log(addictionForm);
+let quote1 = document.getElementById('quote-1');
+let quote2 = document.getElementById('quote-2');
+// console.log(quote1)
+// console.log(initformBtn);
+// console.log(addictionForm);
 
 initformBtn.addEventListener('click', ()=>{
     addictionForm.style.display = 'block';
-    addictionForm.style.marginTop = '-10%'
+    addictionForm.style.marginTop = '-10%';
+    quote1.style.display = 'block';
+    quote2.style.display = 'block';
 })
 
