@@ -12,10 +12,10 @@
     <h1>Register</h1>
     {% include "navigation.html" %}
 
+    
     {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
+        <div class="flash" style="text-align: center; color: crimson;">{{ message }}</div>
     {% endfor %}
-
     <!-- action="/register" -->
     <form method="POST">
         <input type="text" name="username" placeholder="Username" required>

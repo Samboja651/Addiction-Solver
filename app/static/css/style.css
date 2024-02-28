@@ -30,46 +30,7 @@
 }
 
 /*---------- success stories ------------ */
-/* story */
-.user-story{
-  overflow: hidden;
-  /* position: relative; */
-}
 
-/* user story */
-.container{
-  margin-top: 125px;
-  /* position: relative; */
-}
-
-.col{
-    border: 2px solid black;
-    border-radius: 5px;
-    /* min-width: 40%; */
-}
-/* animations 300s -50s*/
-.row{
-  overflow: hidden;
-  position: relative;
-  animation-name: story;
-  animation-duration: 300s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-delay: -70s;
-}
-
-.row:hover{
-  animation-play-state: paused;
-}
-
-@keyframes story {
-    from {
-      left: 100%;
-    }
-    to {
-      left: -300%;
-    }
-}
 
 /* user */
 .name{
@@ -103,7 +64,7 @@ coloring the home page
 }
 
 .name h4{
-    color: var(--bs-success-text-emphasis);
+  color: var(--bs-success-text-emphasis);
 }
 .system-title{
   margin-left: 10%;
@@ -214,3 +175,53 @@ Form Styles
   #addiction-form-section button:hover {
     background-color: #e0e0e0; 
   }
+
+
+  /* ---------------------------------------- */
+
+  .user-story .container .story{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .user-story .container .story .mystory{
+    min-width: 300px;
+  }
+
+.xaxis{
+  overflow: hidden;
+  position: relative;
+  animation-name: story;
+  animation-duration: 30s; /* 300*/
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: s; /* -70*/
+}
+
+.xaxis:hover{
+  animation-play-state: paused;
+}
+
+
+@keyframes story {
+    from {
+      left: 5%;
+    }
+    to {
+      left: -100%;
+    }
+}
+.xaxis, .container, .user-story{
+  width: fit-content;
+  overflow: hidden;
+}
+
+
+
+
+.col{
+  border: 2px solid black;
+  border-radius: 5px;
+  /* min-width: 40%; */
+}
+/* animations 300s -50s*/
