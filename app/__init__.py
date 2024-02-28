@@ -1,9 +1,9 @@
 import os
 
-from . import auth   # will use to create files
+from .routes import auth, help   # will use to create files
 from . import db
 from flask import Flask
-from . import home, help  # import blueprint
+from .routes import home  # import blueprint
  
 
 

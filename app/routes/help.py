@@ -4,7 +4,7 @@ from flask import(
 
 from werkzeug.exceptions import abort
 
-from app.auth import login_required
+from app.routes.auth import login_required
 from app.db import get_db
 
 bp = Blueprint('help', __name__)
