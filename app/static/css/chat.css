@@ -1,0 +1,27 @@
+.chat-box {
+    overflow-y: auto;
+    max-height: 400px;
+}
+.message {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    clear: both;
+    overflow-wrap: break-word;
+    position: relative;
+}
+.user-message {
+    background-color: #dcf8c6;
+    float: right;
+}
+.doctor-message {
+    background-color: #e5e5ea;
+    float: left;
+}
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    color: #777;
+}

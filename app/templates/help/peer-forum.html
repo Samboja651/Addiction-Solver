@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>peer-forum</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
-</head>
-<body>
-    <section id="support-system">
-        <div class="container">
-            <!-- Peer-to-Peer Forum -->
-            <div class="forum">
-                <h3>Peer-to-Peer Forum</h3>
-                <!-- Placeholder for the chat box -->
-                <div class="chat-box" id="peerToPeerChat">
-                    <!-- Chat messages will be dynamically loaded here -->
-                </div>
-                <!-- Input area for sending messages -->
-                <textarea id="peerMessage" placeholder="Type your message..."></textarea>
-                <button onclick="sendPeerMessage()">Send</button>
-            </div>
-        </div>
-    </section>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" class="buttons">
+    <h3>Enter The Chat Room</h3 >
+    <div>
+        <label>Name:</label>
+        <input type="text" placeholder="Pick a name!" name="name" value="{{name}}">
+    </div>
+    <div class="join">
+        <input type="text" placeholder="Room Code" name="code" value="{{code}}">
+        <button type="submit" name="join">Join a room</button>
+    </div>
+    <button type="submit" name="create" class="create">Create a Room</button>
+    {% if error %}
+    <ul>
+        <li>{{error}}</li>
+    </ul>
+    {% endif %}
+</form>
+{% endblock %}
