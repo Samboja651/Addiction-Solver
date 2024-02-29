@@ -68,3 +68,8 @@ CREATE TABLE IF NOT EXISTS success_stories (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES form_data(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS messages (
+    id INTEGER PRIMARY KEY,
+    content TEXT NOT NULL
+)

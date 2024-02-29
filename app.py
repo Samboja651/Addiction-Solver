@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, abort, jsonify
+from flask import (
+    Flask, render_template, request, redirect, url_for, session, flash, abort, jsonify
+    )
+
+from flask_socketio import (SocketIO, join_room, leave_room, send)
+
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
-import sqlite3
-from flask_socketio import SocketIO, join_room, leave_room, send
-import random
-from flask_socketio import join_room, leave_room, send, SocketIO
+
+import bcrypt, sqlite3, random
 from string import ascii_uppercase
 
 
