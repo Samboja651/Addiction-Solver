@@ -11,12 +11,12 @@
 <body style="margin-top: 10%">
     {% include "navigation.html" %}
 
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
-
+    
     <h1>Login</h1>
-    <p>Please fill in your credentials to login.</p>
+    <!-- <p>Please fill in your credentials to login.</p> -->
+    {% for message in get_flashed_messages() %}
+        <div class="flash" style="text-align: center; color: crimson;">{{ message }}</div>
+    {% endfor %}
 
     <!-- action="/login" -->
     <form method="POST">
