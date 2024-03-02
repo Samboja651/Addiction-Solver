@@ -2,13 +2,35 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import sqlite3
+from flask_socketio import SocketIO, join_room, leave_room, send
+import random
+from flask_socketio import join_room, leave_room, send, SocketIO
+from string import ascii_uppercase
+
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///user_credentials.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.secret_key = 'secret_key'
 
 db = SQLAlchemy(app)
+socketio = SocketIO(app)
+
+
+
+rooms = {}
+def generate_unique_code(Length):
+    while True:
+        code = ""
+        for _ in range(Length):
+            code += random.choice(ascii_uppercase)
+
+
+        if code not in rooms:
+            break
+
+    return code
+   
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -152,16 +174,193 @@ def my_story(id):
 
 
 
- # Placeholder for storing chat messages
+#  # Placeholder for storing chat messages
 peer_to_peer_chat = []
 doctor_chat = []
 
 
+# Endpoint for receiving and sending peer-to-peer chat messages
+# @app.route('/peer-chat', methods=['POST'])
+# def peer_chat():
+#     message = request.form.get('message')
+#     peer_to_peer_chat.append(message)
+#     return jsonify({'messages': peer_to_peer_chat})
+
+# # Endpoint for receiving and sending doctor chat messages
+# @app.route('/doctor-chat', methods=['POST'])
+# def doctor_chat():
+#     message = request.form.get('message')
+#     doctor_chat.append(message)
+#     return jsonify({'messages': doctor_chat})
+
+
+
+
+
+@app.route("/peer-forum", methods=["POST", "GET"]) 
+def peer_forum():
+    session.clear()
+    if request.method == 'POST':
+        name = request.form.get("name")
+        code = request.form.get("code")
+        join = request.form.get("join", False)
+        create = request.form.get("create", False)
+
+        if not name:
+            return render_template("peer-forum.html", error = "Please enter a name", code = code, name = name)
+        
+        if join != False and not code:
+            return render_template("peer-forum.html", error = "Please enter a code", code = code, name = name)
+        
+        room = code
+        if create !=False:
+           room = generate_unique_code(4)
+           rooms[room] = {"members": 0, "messages": []}
+
+        elif code not in rooms:
+            return render_template("peer-forum.html", error = "Room does not exist", code = code, name = name)
+        
+        session["room"] = room
+        session["name"] = name
+
+        return redirect(url_for("room"))
+
+
+    return render_template("peer-forum.html")
+
+
+@app.route("/room", methods = ["POST", "GET"])
+def room():
+    room = session.get("room")
+    if room is None or session.get("name") is None or room not in rooms:
+        return redirect(url_for("peer-forum"))
+    
+
+    return render_template("room.html", code=room, messages=rooms[room]["messages"])
+
+@socketio.on("message")
+def message(data):
+    room = session.get("room")
+    if room not in rooms:
+        return
+    
+    name = session.get("name")
+    if name is None:
+        return
+    
+    # Get message content
+    message_content = data.get("data")
+    if message_content is None:
+        return
+
+    # Insert message into the database
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, message_content)
+        conn.close()
+    
+    content = {
+        "name": session.get("name"),
+        "message": data["data"]
+    }
+    send(content, to=room)
+    rooms[room]["messages"].append(content)
+    print(f"{session.get('name')} said: {data['data']}")
+
+
+
+def create_connection():
+    try:
+        conn = sqlite3.connect("app.db")
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+    return None
+
+# Function to create the messages table if it doesn't exist
+def create_table(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS messages (
+                            id INTEGER PRIMARY KEY,
+                            name TEXT NOT NULL,
+                            message TEXT NOT NULL,
+                            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        )''')
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Function to insert a message into the messages table
+def insert_message(conn, name, message):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Connect to the SQLite database
+conn = create_connection()
+if conn is not None:
+    # Create messages table if not exists
+    create_table(conn)
+    conn.close()
+else:
+    print("Error! Cannot create the database connection.")
+
+@socketio.on("connect")
+def connect(auth):
+    room = session.get("room")
+    name = session.get("name")
+    if not room or not name:
+        return
+    
+    if room not in rooms:
+        leave_room(room)
+        return
+    
+    join_room(room)
+    send({"name": name, "message": "has entered the room"}, to=room)
+    rooms[room]["members"] +=1
+    print(f"{name} joined room {room}")
+
+
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has entered the room")
+        conn.close()
+        # print(f"{name} joined room {room}")
+
+@socketio.on("disconnect")
+def disconnect():
+    room = session.get("room")
+    name = session.get("name")
+    leave_room(room)
+
+    if room in rooms:
+        rooms[room]["members"] -=1
+        if rooms[room]["members"] <= 0:
+            del rooms[room]
+
+    send({"name": name, "message": "has left the room"}, to=room)
+    print(f"{name} has left the room {room}")
+
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has left the room")
+        conn.close()
+
+
+
+
+@app.route('/help', methods=['GET'])
 # -----------code inherits operation from previous help page -------------
 @app.route('/help', methods=['GET', 'POST'])
 def help():
     if request.method == 'GET':
         return render_template('help_platform.html')
+    
     
     if request.method == 'POST':
         required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
@@ -210,15 +409,58 @@ def educational_resources():
           
 
 # Endpoint for receiving and sending peer-to-peer chat messages
-@app.route('/peer-forum', methods=['GET'])
-def peer_forum():
-    if request.method == 'GET':
-        return render_template('peer-forum.html')
+# @app.route('/peer-forum', methods=['GET', 'POST'])
+# def peer_forum():
+#     if request.method == 'GET':
+#         return render_template('peer-forum.html')
+    
+
 
 @app.route('/chat-doctor', methods=['GET'])
 def chat_doctor():
     if request.method == 'GET':
         return render_template('chat-doctor.html')
+
+# def connect_db():
+#     return sqlite3.connect('app.db')
+
+
+# # Function to add a new message to the messages table
+# def add_message(content):
+#     # try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('INSERT INTO messages (content) VALUES (?)', (content,))
+#         conn.commit()
+#         conn.close()
+#     #     print("Message added successfully.")
+#     # except sqlite3.Error as e:
+#     #     print("Error adding message:", e)
+
+# # Function to delete a message from the messages table
+# def delete_message(message_id):
+#     # try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('DELETE FROM messages WHERE id = ?', (message_id,))
+#         conn.commit()
+#         conn.close()
+#     #     print("Message deleted successfully.")
+#     # except sqlite3.Error as e:
+#     #     print("Error deleting message:", e)
+
+# # Function to retrieve all messages from the messages table
+# def get_messages():
+#     try:
+#         conn = connect_db()
+#         cursor = conn.cursor()
+#         cursor.execute('SELECT * FROM messages')
+#         messages = cursor.fetchall()
+#         conn.close()
+#         return messages
+#     except sqlite3.Error as e:
+#         print("Error retrieving messages:", e)
+#         return []
 
 
 if __name__ == '__main__':

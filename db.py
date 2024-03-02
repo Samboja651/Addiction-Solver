@@ -78,6 +78,17 @@ def init_db():
     )""")
 
 
+    # Create the messages table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS messages (
+            id INTEGER PRIMARY KEY,
+            content TEXT NOT NULL
+        )
+    ''')
+
     db.commit()
 
 init_db()
+
+
+

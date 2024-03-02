@@ -1,0 +1,88 @@
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.message-box {
+    border-color: #ddd;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    max-width: 500px; /* Added for responsiveness */
+    margin: auto; /* Center the chat box horizontally */
+}
+
+.messages {
+    overflow-y: auto; /* Use auto to show scroll bar only when needed */
+    flex: 1;
+    padding: 10px;
+}
+
+.inputs {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+h2 {
+    text-align: center;
+    margin: 10px 0; /* Added some margin for spacing */
+}
+
+#message {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 20px; /* Rounded corners for input */
+    outline: none;
+    margin-right: 10px; /* Added some spacing between input and button */
+}
+
+#send-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px; /* Rounded corners for button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-btn:hover {
+    background-color: #45a049; /* Darker shade on hover */
+}
+
+
+.text {
+    display: inline-block;
+    max-width: 70%; /* Limiting maximum width to 70% of the container */
+    margin-bottom: 10px;
+}
+
+.text span {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: #DCF8C6; /* Light green for sent messages */
+    color: black;
+    word-wrap: break-word; /* Allow long words to break */
+}
+
+.text.sent span {
+    background-color: #DCF8C6; /* Light green for sent messages */
+    align-self: flex-end; /* Align sent messages to the right */
+}
+
+.text.received span {
+    background-color: #ECE5DD; /* Light grey for received messages */
+    align-self: flex-start; /* Align received messages to the left */
+}
