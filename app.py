@@ -285,6 +285,21 @@ def message(data):
     if room not in rooms:
         return
     
+    name = session.get("name")
+    if name is None:
+        return
+    
+    # Get message content
+    message_content = data.get("data")
+    if message_content is None:
+        return
+
+    # Insert message into the database
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, message_content)
+        conn.close()
+    
     content = {
         "name": session.get("name"),
         "message": data["data"]
@@ -293,6 +308,47 @@ def message(data):
     rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
 
+
+
+def create_connection():
+    try:
+        conn = sqlite3.connect("app.db")
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+    return None
+
+# Function to create the messages table if it doesn't exist
+def create_table(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS messages (
+                            id INTEGER PRIMARY KEY,
+                            name TEXT NOT NULL,
+                            message TEXT NOT NULL,
+                            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        )''')
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Function to insert a message into the messages table
+def insert_message(conn, name, message):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Connect to the SQLite database
+conn = create_connection()
+if conn is not None:
+    # Create messages table if not exists
+    create_table(conn)
+    conn.close()
+else:
+    print("Error! Cannot create the database connection.")
 
 @socketio.on("connect")
 def connect(auth):
@@ -310,6 +366,13 @@ def connect(auth):
     rooms[room]["members"] +=1
     print(f"{name} joined room {room}")
 
+
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has entered the room")
+        conn.close()
+        # print(f"{name} joined room {room}")
+
 @socketio.on("disconnect")
 def disconnect():
     room = session.get("room")
@@ -323,6 +386,12 @@ def disconnect():
 
     send({"name": name, "message": "has left the room"}, to=room)
     print(f"{name} has left the room {room}")
+
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has left the room")
+        conn.close()
+
 
 
 
