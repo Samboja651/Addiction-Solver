@@ -3,7 +3,7 @@
 <div class="message-box">
     <h2>Chat Room: {{code}}</h2>
     <div class="messages" id="messages"></div>
-    <div class="inputs">
+    <div class="inputs" id="message-input">
         <input type="text" rows="3" placeholder="Message" name="message" id="message">
         <button type="button" name="send" id="send-btn" onclick="sendMessage()">
             Send
@@ -12,13 +12,13 @@
 </div>
 
 <script type="text/javascript">
-    var socketio =  io();
+    var socketio = io();
 
-    const messages = document.getElementById("messages")
-    
-    const CreateMessage = (name, msg) => {
+    const messages = document.getElementById("messages");
+
+    const CreateMessage = (name, msg, type) => {
         const content = `
-        <div class="text">
+        <div class="text ${type}">
             <span>
                 <strong>${name}</strong>: ${msg}
             </span>
@@ -27,17 +27,26 @@
         messages.innerHTML += content;
     };
 
-    socketio.on("message", (data)=>{
-        CreateMessage(data.name, data.message)
-    });
+    socketio.on("message", (data) => {
+    CreateMessage(data.name, data.message, "sent"); // Assuming these are sent messages
+});
+    
 
     const sendMessage = () => {
         const message = document.getElementById("message");
-        if (message.value== "") return;
-        socketio.emit("message", {data: message.value});
+        if (message.value === "") return;
+        socketio.emit("message", { data: message.value });
         message.value = "";
-        
-    }; 
+
+    };
+
+    // Event listener to handle Enter key press for sending message
+    document.getElementById("message").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    });
+
 </script>
 {% for msg in messages %}
 <script type="text/javascript">
