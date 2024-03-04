@@ -287,6 +287,21 @@ def message(data):
     if room not in rooms:
         return
     
+    name = session.get("name")
+    if name is None:
+        return
+    
+    # Get message content
+    message_content = data.get("data")
+    if message_content is None:
+        return
+
+    # Insert message into the database
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, message_content)
+        conn.close()
+    
     content = {
         "name": session.get("name"),
         "message": data["data"]
@@ -295,6 +310,47 @@ def message(data):
     rooms[room]["messages"].append(content)
     print(f"{session.get('name')} said: {data['data']}")
 
+
+
+def create_connection():
+    try:
+        conn = sqlite3.connect("app.db")
+        return conn
+    except sqlite3.Error as e:
+        print(e)
+    return None
+
+# Function to create the messages table if it doesn't exist
+def create_table(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS messages (
+                            id INTEGER PRIMARY KEY,
+                            name TEXT NOT NULL,
+                            message TEXT NOT NULL,
+                            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                        )''')
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Function to insert a message into the messages table
+def insert_message(conn, name, message):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(e)
+
+# Connect to the SQLite database
+conn = create_connection()
+if conn is not None:
+    # Create messages table if not exists
+    create_table(conn)
+    conn.close()
+else:
+    print("Error! Cannot create the database connection.")
 
 @socketio.on("connect")
 def connect(auth):
@@ -312,6 +368,13 @@ def connect(auth):
     rooms[room]["members"] +=1
     print(f"{name} joined room {room}")
 
+
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has entered the room")
+        conn.close()
+        # print(f"{name} joined room {room}")
+
 @socketio.on("disconnect")
 def disconnect():
     room = session.get("room")
@@ -326,13 +389,67 @@ def disconnect():
     send({"name": name, "message": "has left the room"}, to=room)
     print(f"{name} has left the room {room}")
 
+    conn = create_connection()
+    if conn is not None:
+        insert_message(conn, name, "has left the room")
+        conn.close()
+
+
 
 
 @app.route('/help', methods=['GET'])
+# -----------code inherits operation from previous help page -------------
+@app.route('/help', methods=['GET', 'POST'])
 def help():
     if request.method == 'GET':
         return render_template('help_platform.html')
     
+    
+    if request.method == 'POST':
+        required_fields = ['addiction-type', 'duration', 'cause', 'severity', 'age', 'gender']
+        form_data = {field: request.form.get(field) for field in required_fields}
+        data = list(form_data.values())
+
+        if not all(form_data.values()):
+            return "Please fill in all fields." 
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+        # get the logged in user's id
+        stmid = 'SELECT user_id FROM user ORDER BY user_id DESC'
+        # .fetchone returns a tuple like (3,) so to get the int itself i use indexing
+        user_id = cursor.execute(stmid).fetchone()[0]
+        # now add the user_id to the list of data to be inserted into db
+        data.append(user_id)
+
+        stm = 'INSERT INTO addiction_data (addiction_type, duration, cause, severity, age, gender, user_id) VALUES(?, ?, ?, ?, ?, ?, ?)'
+        cursor.execute(stm, data)
+
+        # print(data)
+        conn.commit()
+        conn.close()
+
+        return render_template('help_platform.html') 
+    
+
+
+@app.route('/educational_resources', methods=['GET', 'POST'])
+def educational_resources():
+    books = [
+        {"title": "The Biology of Desire: Why Addiction Is Not a Disease", "author": "Marc Lewis"},
+        {"title": "Addiction: A Disorder of Choice", "author": "Gene M. Heyman"},
+        {"title": "Clean: Overcoming Addiction and Ending America’s Greatest Tragedy", "author": "David Sheff"}
+    ]
+
+    videos = [
+        {"title": "TED Talk: Everything You Think You Know About Addiction is Wrong", "speaker": "Johann Hari", "link": "https://www.youtube.com/watch?v=PY9DcIMGxMs"},
+        {"title": "The Opposite of Addiction is Connection", "speaker": "Johann Hari", "link": "https://www.youtube.com/watch?v=PY9DcIMGxMs"},
+        {"title": "Pleasure Unwoven: An Explanation of the Brain Disease of Addiction", "speaker": "Kevin McCauley", "link": "https://www.youtube.com/watch?v=ao8L-0nSYzg"}
+    ]
+
+    return render_template('educational_resources.html', books=books, videos=videos)
+          
 
 # Endpoint for receiving and sending peer-to-peer chat messages
 # @app.route('/peer-forum', methods=['GET', 'POST'])
