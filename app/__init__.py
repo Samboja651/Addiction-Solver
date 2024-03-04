@@ -1,9 +1,9 @@
 import os
 
-from .routes import auth, help   # will use to create files
+from .routes import auth, help, home, peerchat   # will use to create files
 from . import db
 from flask import Flask
-from .routes import home  # import blueprint
+
  
 
 
@@ -38,8 +38,10 @@ def create_app(test_config = None):
     db.init_app(app)        # to initialize db run flask --app app init-db
     app.register_blueprint(auth.bp)
     app.register_blueprint(home.bp)
-    app.add_url_rule('/', endpoint='home')
     app.register_blueprint(help.bp)
+    app.register_blueprint(peerchat.bp)
+    peerchat.app = app
+    app.add_url_rule('/', endpoint='home')
 
     return app
 
