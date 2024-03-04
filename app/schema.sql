@@ -71,5 +71,7 @@ CREATE TABLE IF NOT EXISTS success_stories (
 
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY,
-    content TEXT NOT NULL
-)
+    name TEXT NOT NULL,
+    message TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -11,7 +11,7 @@ from app.db import get_db
 from flask_socketio import (SocketIO, join_room, leave_room, send)
 from string import ascii_uppercase
 import random
-from flask import current_app
+
 
 app = None
 socketio = SocketIO(app)
@@ -49,7 +49,7 @@ def peer_forum():
             return render_template("help/peer-forum.html", error = "Please enter a code", code = code, name = name)
         
         room = code
-        if create !=False:
+        if create != False:
            room = generate_unique_code(4)
            rooms[room] = {"members": 0, "messages": []}
 
@@ -75,19 +75,18 @@ def room():
     return render_template("help/room.html", code=room, messages=rooms[room]["messages"])
 
 
-@socketio.on("message")
-def message(data):
-    room = session.get("room")
-    if room not in rooms:
-        return
-    
-    content = {
-        "name": session.get("name"),
-        "message": data["data"]
-    }
-    send(content, to=room)
-    rooms[room]["messages"].append(content)
-    print(f"{session.get('name')} said: {data['data']}")
+# Function to insert a message into the messages table
+def insert_message(name, message):
+    db = get_db()
+    db.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+    db.commit()
+
+    # try:
+    #     cursor = conn.cursor()
+    #     cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
+    #     conn.commit()
+    # except sqlite3.Error as e:
+    #     print(e)
 
 
 @socketio.on("connect")
@@ -107,8 +106,29 @@ def connect(auth):
     print(f"{name} joined room {room}")
 
 
+    
+    insert_message(name, "has entered the room")
+    print(f"{name} joined room {room}")
+
+
+
 @socketio.on("disconnect")
 def disconnect():
+    room = session.get("room")
+    name = session.get("name")
+    leave_room(room)
+
+    if room in rooms:
+        rooms[room]["members"] -=1
+        if rooms[room]["members"] <= 0:
+            del rooms[room]
+
+    send({"name": name, "message": "has left the room"}, to=room)
+    print(f"{name} has left the room {room}")
+
+
+    insert_message(name, "has left the room")
+
     room = session.get("room")
     name = session.get("name")
     leave_room(room)

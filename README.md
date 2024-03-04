@@ -10,7 +10,7 @@ How to run the seed.py `python3 seed.py`
 
 
 # Important
-I followed this [tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/) that was recommended by **Mohammed**. The results are fruitful and encouraging. I know that the structure of code / syntax can be confusing, I also struggled understanding some concepts but with practice I'm understanding it. I urge to practice as well for a fruitful contribution.
+I followed this [tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/) that was recommended by **Mohammed**. The **results** are fruitful and encouraging. I know that the structure of code / syntax can be confusing, I also struggled understanding some concepts but with practice I'm understanding it. I urge to practice as well for a fruitful contribution.
 
 ### cheers for this success
 ![alt text](/app/static/images/image.png)
