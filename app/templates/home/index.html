@@ -56,12 +56,14 @@
 
     <!-- Addiction Information Form -->
     <section class="open-up d-flex flex-wrap" >
-        <h3 id="quote-1" class="p-2 flex-shrink-1 align-self-center">Opening up is always the first step to Recovery</h3>
-        
+        <!-- <h3 id="quote-1" class="p-2 flex-shrink-1 align-self-center">Opening up is always the first step to Recovery</h3> -->
         <div id="addiction-form-section" class="p-2 w-100">
+            {% for message in get_flashed_messages() %}
+                <div class="flash" style="text-align: center; color: crimson;">{{ message }}</div>
+            {% endfor %}
             <h3>Tell Us About Your Addiction</h3>
         
-            <form method="POST" id="addiction-form">
+            <form method="POST" action="{{ url_for('help.platform') }}" id="addiction-form">
             <label for="addiction-type">Type of Addiction:</label>
             <input type="text" id="addiction-type" name="addiction-type" required>
     
@@ -94,7 +96,7 @@
             </form>
         </div>
 
-        <h3 id="quote-2" class="p-2 flex-shrink-1 align-self-center">You are not weak for struggling. You are strong for continuing to fight.</h3>
+        <!-- <h3 id="quote-2" class="p-2 flex-shrink-1 align-self-center">You are not weak for struggling. You are strong for continuing to fight.</h3> -->
      </section>    
 
     

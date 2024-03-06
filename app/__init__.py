@@ -15,6 +15,7 @@ def create_app(test_config = None):
     app.config.from_mapping(
         SECRET_KEY = 'dev',
         DATABASE = os.path.join(app.instance_path, 'app.sqlite'),  # not sure with file path
+
     )
 
     if test_config is None:
@@ -44,6 +45,7 @@ def create_app(test_config = None):
     peerchat.app = app
     
     app.add_url_rule('/', endpoint='home')
+
 
     return app
 

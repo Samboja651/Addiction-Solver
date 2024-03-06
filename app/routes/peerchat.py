@@ -75,6 +75,37 @@ def room():
     return render_template("help/room.html", code=room, messages=rooms[room]["messages"])
 
 
+
+@socketio.on("message")
+def message(data):
+    room = session.get("room")
+    if room not in rooms:
+        return
+    
+    name = session.get("name")
+    if name is None:
+        return
+    
+    # Get message content
+    message_content = data.get("data")
+    if message_content is None:
+        return
+
+    # Insert message into the database
+    insert_message(name, message_content)
+
+    print(name, message)
+    
+    content = {
+        "name": session.get("name"),
+        "message": data["data"]
+    }
+    send(content, to=room)
+    rooms[room]["messages"].append(content)
+    print(f"{session.get('name')} said: {data['data']}")
+
+
+
 # Function to insert a message into the messages table
 def insert_message(name, message):
     db = get_db()

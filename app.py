@@ -417,6 +417,7 @@ def help():
         cursor = conn.cursor()
 
         # get the logged in user's id
+        
         stmid = 'SELECT user_id FROM user ORDER BY user_id DESC'
         # .fetchone returns a tuple like (3,) so to get the int itself i use indexing
         user_id = cursor.execute(stmid).fetchone()[0]
