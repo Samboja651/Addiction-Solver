@@ -18,22 +18,10 @@ def seed_db():
         ("9", "Kelvin Ogembo", "I'm 9 years sober thanks to Addiction Solver helping me reconnect to myself & God.", "http://localhost:5000/mystory/9"),
         ("10", "Christine Ngandi", "In just 30 days, my doctor at Addiction Solver helped me find a special person I didn't realize lived inside of me.", "http://localhost:5000/mystory/10")
     ]
-
-    # form_data = [
-    #     ("Alcoholism", "5", "inheritance from parents", "6", "32", "Female", '1'),
-    #     ("Smoking", "6", "Peer influence", "3", "35", "Male", '2'),
-    #     ("Social Media", "7", "Bad habit", "9", "43", "Male", '3')
-    # ]
-
-    # users = [
-    #     ("Jane Wawuda", "1234567890"),
-    #     ("Abdallah Masoud", "0987654321"),
-    #     ("John Majiba", "0123456789")
-    # ]
+    
+    addiction_types = []
 
     cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
-    # cursor.executemany('INSERT INTO addiction_data (addiction_type, duration, cause, severity, age, gender, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)', form_data)
-    # cursor.executemany('INSERT INTO user(username, password) VALUES(?, ?)', users)
 
     conn.commit()
     conn.close()

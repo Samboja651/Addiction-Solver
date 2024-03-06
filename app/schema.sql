@@ -54,9 +54,20 @@ CREATE TABLE IF NOT EXISTS educational_resources (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     link VARCHAR(255) NOT NULL,
-    addiction_id INTEGER UNIQUE,
-    FOREIGN KEY (addiction_id) REFERENCES addiction_data(addiction_id)
 );
+
+--addiction types
+CREATE TABLE IF NOT EXISTS addiction (
+    id PRIMARY KEY AUTOINCREMENT,
+    addiction_type TEXT,
+    FOREIGN KEY(resource_id) REFERENCES educational_resources(resource_id)
+)
+
+CREATE TABLE IF NOT EXISTS severity (
+    id PRIMARY KEY AUTOINCREMENT,
+    severity_type TEXT,
+    FOREIGN KEY(resource_id) REFERENCES educational_resources(resource_id)
+)
 
 
 CREATE TABLE IF NOT EXISTS success_stories (
