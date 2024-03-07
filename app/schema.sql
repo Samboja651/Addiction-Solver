@@ -49,27 +49,27 @@ CREATE TABLE IF NOT EXISTS user_doctor_chat (
 
 -- educational resources
 CREATE TABLE IF NOT EXISTS educational_resources (
-    resource_id INTEGER PRIMARY KEY,
-    resource_type VARCHAR(50) NOT NULL,
+    resource_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    addiction_type VARCHAR(50) NOT NULL,
     title VARCHAR(255) NOT NULL,
-    description TEXT,
-    link VARCHAR(255) NOT NULL
+    body TEXT,
+    link VARCHAR(255) NOT NULL,
+    type_id INTEGER UNIQUE,
+    level_id INTEGER UNIQUE,
+    FOREIGN KEY(type_id) REFERENCES addiction(type_id),
+    FOREIGN KEY(level_id) REFERENCES severity(level_id)
 );
 
 --addiction types
 CREATE TABLE IF NOT EXISTS addiction (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    addiction_type TEXT,
-    resource_id INTEGER UNIQUE,
-    FOREIGN KEY(resource_id) REFERENCES educational_resources(resource_id)
+    type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    addiction_type TEXT
 );
 
 --severity types
 CREATE TABLE IF NOT EXISTS severity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    severity_type TEXT,
-    resource_id INTEGER UNIQUE,
-    FOREIGN KEY(resource_id) REFERENCES educational_resources(resource_id)
+    level_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    severity_type TEXT
 );
 
 

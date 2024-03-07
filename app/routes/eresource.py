@@ -5,12 +5,15 @@ from flask import(
 from app.routes.auth import login_required
 from app.db import get_db
 
-bp = Blueprint('resource', __name__)
+bp = Blueprint('resources', __name__)
 
-@bp.route('/eresource', methods=('GET, POST'))
+@bp.route('/eresources', methods=('GET', 'POST'))
 def resource():
+    db = get_db()
+    addictions = db.execute('SELECT addiction_type FROM addiction').fetchall()
     if request.method == 'GET':
-        return render_template('eresource/base.html')
+        return render_template('eresource/base.html', labels = addictions)
 
+    
 
 

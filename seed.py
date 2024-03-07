@@ -20,14 +20,31 @@ def seed_db():
     ]
     
     addiction_types = [
-        ('Substance use disorder', 1),
-        ('Sexual', 2),
-        ('Technology', 3),
-        ('Gambling', 4) 
+        ('Substance use disorder',),
+        ('Sexual',),
+        ('Technology',),
+        ('Gambling',) 
         ]
-
-    cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
-    cursor.executemany('INSERT INTO addiction (addiction_type, resource_id) VALUES (?, ?)', addiction_types)
+# CREATE TABLE IF NOT EXISTS educational_resources (
+#     resource_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     title VARCHAR(255) NOT NULL,
+#     body TEXT,
+#     article_link VARCHAR(255) NOT NULL,
+#     video_name TEXT,
+#     video_link TEXT,
+#     type_id INTEGER,
+#     level_id INTEGER,
+#     FOREIGN KEY(type_id) REFERENCES addiction(type_id),
+#     FOREIGN KEY(level_id) REFERENCES severity(level_id)
+# );
+    e_resources = [
+        ("Understanding Substance Abuse: Common Causes and Long-Term Effects",
+         "Substance abuse affects millions, disrupting lives and health. It's a disease, not a choice, often driven by genetics, mental health, stress, and environmental factors. Childhood trauma and lack of social support play a role. Long-term abuse leads to severe health issues. Seeking help is crucial. Sage Clinic offers resources and care for recovery.",
+         "https://sageclinic.org/blog/substance-abuse-causes-long-term-effects/",  
+         )
+    ]
+    # cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
+    cursor.executemany('INSERT INTO addiction (addiction_type) VALUES (?)', addiction_types)
 
     conn.commit()
     conn.close()
