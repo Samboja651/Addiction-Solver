@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS addiction (
     FOREIGN KEY(resource_id) REFERENCES educational_resources(resource_id)
 );
 
+--severity types
 CREATE TABLE IF NOT EXISTS severity (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     severity_type TEXT,

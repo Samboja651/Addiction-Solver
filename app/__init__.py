@@ -1,6 +1,6 @@
 import os
 
-from .routes import auth, help, home, peerchat   # will use to create files
+from .routes import auth, eresource, help, home, peerchat   # will use to create files
 from . import db
 from flask import Flask
 from flask_socketio import SocketIO
@@ -42,6 +42,7 @@ def create_app(test_config = None):
     app.register_blueprint(home.bp)
     app.register_blueprint(help.bp)
     app.register_blueprint(peerchat.bp)
+    app.register_blueprint(eresource.bp)
     peerchat.app = app
     
     app.add_url_rule('/', endpoint='home')

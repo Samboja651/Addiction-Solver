@@ -20,13 +20,14 @@ def seed_db():
     ]
     
     addiction_types = [
-        'Substance use disorder',
-        'Sexual',
-        'Technology',
-        'Gambling' 
+        ('Substance use disorder', 1),
+        ('Sexual', 2),
+        ('Technology', 3),
+        ('Gambling', 4) 
         ]
 
     cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
+    cursor.executemany('INSERT INTO addiction (addiction_type, resource_id) VALUES (?, ?)', addiction_types)
 
     conn.commit()
     conn.close()
