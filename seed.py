@@ -19,7 +19,12 @@ def seed_db():
         ("10", "Christine Ngandi", "In just 30 days, my doctor at Addiction Solver helped me find a special person I didn't realize lived inside of me.", "http://localhost:5000/mystory/10")
     ]
     
-    addiction_types = []
+    addiction_types = [
+        'Substance use disorder',
+        'Sexual',
+        'Technology',
+        'Gambling' 
+        ]
 
     cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
 
