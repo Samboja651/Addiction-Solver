@@ -50,12 +50,13 @@ CREATE TABLE IF NOT EXISTS user_doctor_chat (
 -- educational resources
 CREATE TABLE IF NOT EXISTS educational_resources (
     resource_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    addiction_type VARCHAR(50) NOT NULL,
     title VARCHAR(255) NOT NULL,
     body TEXT,
-    link VARCHAR(255) NOT NULL,
-    type_id INTEGER UNIQUE,
-    level_id INTEGER UNIQUE,
+    article_link VARCHAR(255) NOT NULL,
+    video_name TEXT,
+    video_link TEXT,
+    type_id INTEGER,
+    level_id INTEGER,
     FOREIGN KEY(type_id) REFERENCES addiction(type_id),
     FOREIGN KEY(level_id) REFERENCES severity(level_id)
 );
