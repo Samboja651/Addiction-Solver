@@ -1,6 +1,10 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .container {
@@ -16,11 +20,11 @@ body {
     margin: 0 auto;
 }
 
-header {
+/* header {
     background-color: greenyellow;
     color: black;
     padding: 20px 0;
-}
+} */
 
 header .logo {
     font-size: 24px;

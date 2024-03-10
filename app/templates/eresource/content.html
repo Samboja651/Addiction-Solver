@@ -9,11 +9,13 @@
 
 {% block content %}
     {% for resource in eresources %}
-        <h2>{{ resource.title }}</h2>
-        <p>{{ resource.body }}</p>
-        <a href="{{resource.article_link }}">Read More</a>
-        <h2>{{ resource.video_name }}</h2>
-        <iframe width="560" height="315" src="{{ resource.video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+        <div class="article">
+            <h2>{{ resource.title }}</h2>
+            <p>{{ resource.body }}</p>
+            <a href="{{resource.article_link }}">Read More</a>
+            <h2>{{ resource.video_name }}</h2>
+            <iframe width="560" height="315" src="{{ resource.video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        </div>
     {% endfor %}
 {% endblock%}
