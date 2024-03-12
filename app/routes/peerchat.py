@@ -13,8 +13,10 @@ from string import ascii_uppercase
 import random
 
 
-app = None
-socketio = SocketIO(app)
+
+bp = Blueprint('peerchat', __name__)
+socketio = SocketIO()
+
 
 
 rooms = {}
@@ -31,7 +33,7 @@ def generate_unique_code(Length):
     return code
 
 
-bp = Blueprint('peerchat', __name__)
+# bp = Blueprint('peerchat', __name__)
 
 @bp.route("/help/peer-forum", methods=["POST", "GET"])
 def peer_forum():
@@ -76,52 +78,8 @@ def room():
 
 
 
-@socketio.on("message")
-def message(data):
-    room = session.get("room")
-    if room not in rooms:
-        return
-    
-    name = session.get("name")
-    if name is None:
-        return
-    
-    # Get message content
-    message_content = data.get("data")
-    if message_content is None:
-        return
-
-    # Insert message into the database
-    insert_message(name, message_content)
-
-    print(name, message)
-    
-    content = {
-        "name": session.get("name"),
-        "message": data["data"]
-    }
-    send(content, to=room)
-    rooms[room]["messages"].append(content)
-    print(f"{session.get('name')} said: {data['data']}")
-
-
-
-# Function to insert a message into the messages table
-def insert_message(name, message):
-    db = get_db()
-    db.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
-    db.commit()
-
-    # try:
-    #     cursor = conn.cursor()
-    #     cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message))
-    #     conn.commit()
-    # except sqlite3.Error as e:
-    #     print(e)
-
-
 @socketio.on("connect")
-def connect(auth):
+def connect():
     room = session.get("room")
     name = session.get("name")
     if not room or not name:
@@ -132,16 +90,13 @@ def connect(auth):
         return
     
     join_room(room)
-    send({"name": name, "message": "has entered the room"}, to=room)
-    rooms[room]["members"] +=1
+    send({"name": name, "message": "joined room " + room}, to=room)  # Notify room members about the new user
+    rooms[room]["members"] += 1
     print(f"{name} joined room {room}")
 
-
+    # # Update the messages list to include the join message
+    # rooms[room]["messages"].append({"name": name, "message": f"joined room {room}"})
     
-    insert_message(name, "has entered the room")
-    print(f"{name} joined room {room}")
-
-
 
 @socketio.on("disconnect")
 def disconnect():
@@ -150,24 +105,48 @@ def disconnect():
     leave_room(room)
 
     if room in rooms:
-        rooms[room]["members"] -=1
+        rooms[room]["members"] -= 1
         if rooms[room]["members"] <= 0:
             del rooms[room]
 
-    send({"name": name, "message": "has left the room"}, to=room)
+    send({"name": name, "message": "has left the room"}, to=room)  # Notify room members about the user leaving
     print(f"{name} has left the room {room}")
 
+    # # Update the messages list to include the leave message
+    # rooms[room]["messages"].append({"name": name, "message": "has left the room"})
 
-    insert_message(name, "has left the room")
 
+@socketio.on("message")
+def message(data):
     room = session.get("room")
+    if room not in rooms:
+        return
+    
     name = session.get("name")
-    leave_room(room)
+    if name is None:
+        return
+    
+    message_content = data.get("message")
+    if message_content is None:
+        return
+    
+    # Insert message into database
+    insert_message(name, message_content)
+    
+    # Broadcast message to room members
+    content = {
+        "name": session.get("name"),
+        "message": message_content
+    }
+    send(content, to=room)
+    rooms[room]["messages"].append(content)
+    print(f"{session.get('name')} said: {message_content}")
 
-    if room in rooms:
-        rooms[room]["members"] -=1
-        if rooms[room]["members"] <= 0:
-            del rooms[room]
-
-    send({"name": name, "message": "has left the room"}, to=room)
-    print(f"{name} has left the room {room}")
+def insert_message(name, message_content):
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO messages (name, message) VALUES (?, ?)", (name, message_content))
+        db.commit()
+    except Exception as e:
+        print(f"Error inserting message into database: {e}")

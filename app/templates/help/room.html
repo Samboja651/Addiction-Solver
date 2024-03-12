@@ -2,8 +2,21 @@
 {% extends 'help/base.html' %}
 {% block content %}
 <div class="message-box">
-    <h2>Chat Room: {{code}}</h2>
-    <div class="messages" id="messages"></div>
+    <h2>Chat Room: {{ code }}</h2>
+    <div class="messages" id="messages">
+        <!-- Loop through existing messages and display them -->
+        {% for msg in messages %}
+        {% if msg.name == session['name'] %}
+        <div class="text sent">
+        {% else %}
+        <div class="text received">
+        {% endif %}
+            <span>
+                <strong>{{ msg.name }}</strong>: {{ msg.message }}
+            </span>
+        </div>
+        {% endfor %}
+    </div>
     <div class="inputs" id="message-input">
         <input type="text" rows="3" placeholder="Message" name="message" id="message">
         <button type="button" name="send" id="send-btn" onclick="sendMessage()">
@@ -14,10 +27,9 @@
 
 <script type="text/javascript">
     var socketio = io();
-
     const messages = document.getElementById("messages");
 
-    const CreateMessage = (name, msg, type) => {
+    const createMessage = (name, msg, type) => {
         const content = `
         <div class="text ${type}">
             <span>
@@ -29,17 +41,15 @@
     };
 
     socketio.on("message", (data) => {
-    CreateMessage(data.name, data.message, "sent"); // Assuming these are sent messages
-});
-    
+        createMessage(data.name, data.message); // Display received messages
+    });
 
     const sendMessage = () => {
-        const message = document.getElementById("message");
-        if (message.value === "") return;
-        socketio.emit("message", { data: message.value });
-        message.value = "";
-
-    };
+    const message = document.getElementById("message");
+    if (message.value == "") return;
+    socketio.emit("message", {message: message.value}); // Sending message as an object
+    message.value = "";
+};
 
     // Event listener to handle Enter key press for sending message
     document.getElementById("message").addEventListener("keypress", function (event) {
@@ -47,12 +57,5 @@
             sendMessage();
         }
     });
-
 </script>
-{% for msg in messages %}
-<script type="text/javascript">
-    CreateMessage("{{msg.name}}", "{{msg.message}}")
-</script>
-{% endfor %}
-
 {% endblock %}
