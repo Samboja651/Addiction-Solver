@@ -1,63 +1,70 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-}
-
-.container {
-    width: 90%;
-    margin: 0 auto;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-content: center;
+    padding: 0 12%;
 }
 
-.container2 {
-    width: 90%;
-    margin: 0 auto;
-}
 
 header {
     background-color: greenyellow;
+    border-radius: 5px;
     color: black;
-    padding: 20px 0;
+    text-align: center;
+    padding: 5px 10px;
+    width: fit-content;
+    margin-bottom: 20px;
 }
 
-header .logo {
-    font-size: 24px;
-    font-weight: bold;
+p{
+    font-size: 20px;
 }
 
-header nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-header nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-main {
-    background-color: #f9f9f9;
-    padding: 20px 0;
+.video{
+    margin: 20px 0;
 }
 
 section {
     margin-bottom: 40px;
 }
 
+
 h2 {
     margin-top: 0;
 }
 
-.article, .video {
-    background-color: #fff;
-    padding: 20px;
+
+.search-container {
     margin-bottom: 20px;
-    border-radius: 5px;
+    text-align: center;
 }
 
+#search-input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: #13aa52;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#search-button:hover {
+    background-color: #0e8540;
+}
+
+
+/* 
 footer {
     background-color: #333;
     color: #fff;
@@ -74,11 +81,6 @@ footer nav ul {
 footer nav ul li {
     display: inline;
     margin-right: 20px;
-}
-
-.social-media img {
-    width: 30px;
-    margin-right: 10px;
 }
 
 .filter-btn {
@@ -112,31 +114,5 @@ footer nav ul li {
   .filter-btn {
     padding: 10px 30px;
   }
-}
+} */
 
-.search-container {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-#search-input {
-    padding: 10px;
-    width: 70%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-#search-button {
-    padding: 10px 20px;
-    background-color: #13aa52;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#search-button:hover {
-    background-color: #0e8540;
-}
