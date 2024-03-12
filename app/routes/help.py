@@ -56,8 +56,8 @@ def peer_forum():
     return render_template('help/peer-forum.html')
 
 
-# educational_resources
-# @bp.route('/help/eresources')
+# # educational_resources
+# @bp.route('/test/eresources')
 # @login_required
 # def e_resources():
 #     return render_template('help/educational_resources.html')

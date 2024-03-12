@@ -15,12 +15,16 @@ def resource():
         return render_template('eresource/base.html', labels = addictions)
 
     label = request.form['label']
+    if label == 'none':
+        return render_template('eresource/base.html', labels = addictions)
+    
+
     if label == 'All':
         eresources = db.execute("SELECT title, body, article_link, video_name, video_link FROM educational_resources").fetchall()
-        return render_template('eresource/content.html', eresources = eresources, labels = addictions)
+        return render_template('eresource/content.html', eresources = eresources, labels = addictions, label = label)
     
     eresources = db.execute("SELECT title, body, article_link, video_name, video_link FROM educational_resources WHERE type_id IN (SELECT type_id FROM addiction WHERE addiction_type = ?)", (label,)).fetchall()
 
-    return render_template('eresource/content.html', eresources = eresources, labels = addictions)
+    return render_template('eresource/content.html', eresources = eresources, labels = addictions, label = label)
 
 
