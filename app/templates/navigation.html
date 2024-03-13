@@ -15,8 +15,11 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 customize">
                     {% if g.user %}
                         <!-- only for logged in user -->
-                        <!-- user name -->
-                        
+                        <!-- home -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
+                        </li>
+
                         <!-- help -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('help.platform') }}">Help</a>
@@ -31,7 +34,9 @@
                     {% else %}
                         <!-- show this for non logged in user -->
                         <!-- home -->
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
+                        </li>
 
                         <!-- register -->
                         <li class="nav-item">

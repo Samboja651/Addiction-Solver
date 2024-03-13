@@ -35,6 +35,7 @@ I followed this [tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/)
 - [ ] peer-doctor chat is not implemented
 - [ ] code formating - remove unnecessarty comments and files
 - [ ] making final presentation video for the class
+- [ ] success_stories transition, animation
   
 *Anyone can take on the tasks above or mention another are they want to fix. Please share ASAP in the TSP group the task you are doing so that we don't have to members working on same thing.*
 
