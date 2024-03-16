@@ -52,7 +52,7 @@
   overflow: hidden;
   position: relative;
   animation-name: story;
-  animation-duration: 10s;
+  animation-duration: 20s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-delay: 0s;
