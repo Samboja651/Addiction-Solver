@@ -105,8 +105,8 @@ def seed_db():
           )
 
     ]
-    # cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
-    # cursor.executemany('INSERT INTO addiction (addiction_type) VALUES (?)', addiction_types)
+    cursor.executemany('INSERT INTO success_stories (user_id, user_name, story, story_url) VALUES (?, ?, ?, ?)', success_stories)
+    cursor.executemany('INSERT INTO addiction (addiction_type) VALUES (?)', addiction_types)
     cursor.executemany("INSERT INTO educational_resources(title, body, article_link, video_name, video_link, type_id, level_id) VALUES(?, ?, ?, ?, ?, ?, ?)", e_resources)
 
     conn.commit()

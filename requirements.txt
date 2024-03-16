@@ -1,5 +1,3 @@
 flask
 sqlite3
-bcrypt
-flask_sqlalchemy
 flask_socketio

@@ -19,7 +19,7 @@ def delete_table(database_file, table_name):
         print(f"Error: {e}")
 
 # Replace 'your_database.db' with the actual name of your SQLite database file
-database_file = 'app.db'
+database_file = './instance/app.sqlite'
 
 # Replace 'your_table_name' with the name of the table you want to delete
 table_name = 'users'
