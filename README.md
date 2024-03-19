@@ -1,5 +1,6 @@
 # Addiction-Solver
-A Web Application to help people overcome their Addiction
+A Web Application to help people overcome their Addiction.
+[Access Live page](https://addiction-solver.onrender.com/)
 
 **The database is already setup and available in this branch so go ahead and run the app.**
 
@@ -28,16 +29,9 @@ I followed this [tutorial](https://flask.palletsprojects.com/en/3.0.x/tutorial/)
 6. Form data is saved alongside with the logged in user id. Query the `addiction_data` table to see this. The code is in the `help.py` file.
 
 ## Next Step to fix
-- [x] means task is accomplished
-- [x] style the help/eresource page. Try comparing the styles in previos educational resource page and fix them to the current one.
 - [ ] The home page is not responsive on different screen sizes.
-- [x] There's a bug in the peer forum room page, can't send messages `fixed`
 - [ ] peer-doctor chat is not implemented
-- [ ] code formating - remove unnecessarty comments and files
-- [ ] making final presentation video for the class
-- [ ] success_stories transition, animation
   
-*Anyone can take on the tasks above or mention another are they want to fix. Please share ASAP in the TSP group the task you are doing so that we don't have to members working on same thing.*
 
 ### for this new upgrade.
 ![alt text](/app/static/images/thank-you-gif-1.gif)
