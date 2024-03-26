@@ -15,7 +15,10 @@ def home():
     stories = db.execute(
         'SELECT user_name, story, story_url FROM success_stories'
     ).fetchall()
-    return render_template('home/index.html', stories = stories)
+
+    addictions = db.execute('SELECT addiction_type FROM addiction').fetchall()
+
+    return render_template('home/index.html', stories = stories, addiction_type = addictions)
 
 
 @bp.route('/mystory/<id>', methods=('GET', 'POST'))

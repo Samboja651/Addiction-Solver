@@ -8,6 +8,7 @@ from app.db import get_db
 bp = Blueprint('resources', __name__)
 
 @bp.route('/help/eresources', methods=('GET', 'POST'))
+@login_required
 def resource():
     db = get_db()
     addictions = db.execute('SELECT addiction_type FROM addiction').fetchall()

@@ -13,12 +13,13 @@
 
     <section>
         <div class="programs" style="margin-top: 150px;">
-            <div class="peer-doctor">
-                <a href="{{ url_for('help.chat_doctor') }}">
-                    <img src="{{ url_for('static', filename='images/chat_doctor.jpg') }}" alt="chat with chat_doctor"
-                    style="width: 368px; height: 295px;">
-                    <p>Talk to a Doctor to help you walk the journey to your Recovery</p>
-                    <div class="title">Talk to a Doctor</div>
+            
+            <div class="chatbot">
+                <a href="https://addiction-solver.zapier.app/">
+                    <img src="{{ url_for('static', filename='images/Chatbot.png') }}" alt="chatbot guide"
+                    style="width: 368px; height: 306px;">
+                    <p>Chatbot to guide you recover from your addiction.</p>
+                    <div class="title resource">Assistant Chatbot</div>
                 </a>
             </div>
 
@@ -30,13 +31,23 @@
                     <div class="title forum">Peer-Peer Forum</div>
                 </a>
             </div>
-
+            
             <div class="e-resources">
                 <a href="{{ url_for('resources.resource') }}">
                     <img src="{{ url_for('static', filename='images/e_resources.png') }}" alt="learning resources"
                     style="width: 368px; height: 306px;">
                     <p>Learn from resources designed specifically for your needs</p>
                     <div class="title resource">Educational Resources</div>
+                </a>
+            </div>
+            
+            <div class="peer-doctor">
+                <a href="{{ url_for('help.chat_doctor') }}">
+                    <img src="{{ url_for('static', filename='images/chat_doctor.jpg') }}" alt="chat with chat_doctor"
+                    style="width: 368px; height: 295px; margin-top: 0px;">
+                    <p style="margin-bottom: 0px;">Talk to a Doctor to help you walk the journey to your Recovery</p>
+                    <h4 style="color: red; text-align: center;">COMING SOON</h4>
+                    <div class="title">Talk to a Doctor</div>
                 </a>
             </div>
         </div>

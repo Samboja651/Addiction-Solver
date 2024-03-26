@@ -3,8 +3,9 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 20px;
+    margin-bottom: 50px;
 }
-.peer-doctor, .peer-peer, .e-resources{
+.peer-doctor, .peer-peer, .e-resources, .chatbot{
     border: 2px solid black;
     display: flex;
     flex-direction: column;
@@ -13,7 +14,9 @@
 /* .programs div:hover{
     cursor: pointer;
 } */
-
+/* .chatbot{
+    align-self: flex-start;
+} */
 .title{
     border: 2px solid black;
     text-align: center;
