@@ -1,9 +1,7 @@
 from flask import(
-    Blueprint, flash, g, redirect, render_template, request, url_for, session
+    Blueprint, redirect, render_template, request, url_for, session
 )
 # i'm doubting that the session might bring problem, because its likely not compatible with this file's code styilng
-
-from werkzeug.exceptions import abort
 
 from app.routes.auth import login_required
 from app.db import get_db
