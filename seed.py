@@ -102,6 +102,26 @@ def seed_db():
               "https://www.youtube.com/embed/7AN3VLLlkdI?si=bd7e5DRd81cIUXK2",
               4,
               2
+          ),
+
+          (
+              "What causes addiction",
+              "Take a look at the science of how addictive drugs affect your body and why substance addiction can be so difficult to treat. As of 2021, more than 36 million people were estimated to be experiencing substance use disorder. This condition spans a spectrum of patterned drug use that causes issues in a person’s life, with substance addiction at the more severe end. Why are some people more susceptible to addiction, and why can it be so difficult to treat?",
+              "https://ed.ted.com/lessons/what-causes-addiction-and-why-is-it-so-hard-to-treat-judy-grisel/digdeeper",
+              "The Science of Addiction",
+              "https://www.youtube.com/embed/hBC7i-vHWsU?si=gHsDwpEIys3_oQC0",
+              0,
+              1
+          ),
+
+          (
+              "Quiting Addiction",
+              "In this resource we're going to outline the general strategy that we'll be using to quit pornography as well as any other addiction you might have. By simply having a strategy your chances of success will increase dramatically. This strategy stems from the fact that habits can not be erased. They can only be altered and replaced. The best way to quit your addiction is to find good habits that are fulfilling enough to take it's place.",
+              "<article link>",
+              "How to Quit Any Addiction",
+              "https://www.youtube.com/embed/m8JjuyRIxOg?si=0l-q5mnJhqqp2-mT",
+              0,
+              1
           )
 
     ]
