@@ -38,9 +38,10 @@
 
 /* user story */
 .container{
-  margin-top: 125px;
+  padding-top: 125px;
   /* position: relative; */
 }
+
 
 .col{
     border: 2px solid black;
