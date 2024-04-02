@@ -30,33 +30,87 @@
 }
 
 /*---------- success stories ------------ */
-/* story */
-.user-story{
+/* .ticker-tape{
+  height: auto;
+  margin: auto;
   overflow: hidden;
-  /* position: relative; */
+  position: relative;
+  width: 100%;
 }
+
+.slide-track{
+  -webkit-animation: scroll 40s linear infinite;
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: calc(300px * 10);
+} */
+
+/* .slide{
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+
+} */
+
+/* @-webkit-keyframes scroll{
+  0%{
+    transform: translate(0);
+  }
+  100%{
+    transform: translate(calc(-250px * 5));
+  }
+} */
+
+/* @keyframes scroll {
+  0%{
+    transform: translate(0);
+  }
+  100%{
+    transform: translate(calc(-250px * 5));
+  }
+} */
+
+
+
+
+
+
+
+/* ---------end new----------- */
+/* story */
+/* .user-story{
+  overflow: hidden;
+} */
 
 /* user story */
 .container{
+  height: auto;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
   margin-top: 125px;
-  /* position: relative; */
 }
 
 
 .col{
     border: 2px solid black;
     border-radius: 5px;
-    /* min-width: 40%; */
 }
 /* animations 300s -50s*/
 .row{
   overflow: hidden;
   position: relative;
   animation-name: story;
-  animation-duration: 20s;
+  animation-duration: 30s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-delay: 0s;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  width: calc(350px * 10 + 200px);
 }
 
 .row:hover{
@@ -64,12 +118,12 @@
 }
 
 @keyframes story {
-    from {
-      left: 0%;
-    }
-    to {
-      left: -100%;
-    }
+  0%{
+    transform: translate(0);
+  }
+  100%{
+    transform: translate(calc(-350px * 5 + 200px));
+  }
 }
 
 /* user */
