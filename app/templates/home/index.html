@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- <a target="_blank" href="https://icons8.com/icon/mgN3VBi6H7eM/recovery">Recovery</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
+
     <!-- Primary Meta Tags -->
     <title>Addiction Solver</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png')}}" type="image/x-icon">
     <meta name="title" content="Addiction Solver" />
     <meta name="description" content="Addiction Solver is an application that equips you with tools to conveniently help you overcome your addiction." />
 
@@ -49,9 +52,9 @@
         <div class="container text-center">
             <h2 class="text-success">Success Stories</h2>
             <!-- one row for all story display -->
-            <div class="row " style="wdidth: 500vw;">
+            <div class="row">
                 {% for story in stories %}                    
-                    <div class="col success" id="story" style="min-widdth: 25vw; max-wsidth: 25vw;">
+                    <div class="col success" id="story">
                         <a href="{{ story['story_url'] }}" id="mylink">
                             <div class="name">
                                 <h4 class="dark" id="dark">{{ story['user_name'] }}</h4>
