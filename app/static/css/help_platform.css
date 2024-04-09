@@ -1,0 +1,41 @@
+.programs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+.peer-doctor, .peer-peer, .e-resources{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 200px;
+}
+/* .programs div:hover{
+    cursor: pointer;
+} */
+
+.title{
+    border: 2px solid black;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+}
+
+.title{
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+
+p{
+    padding: 10px;
+}
+.programs div a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+

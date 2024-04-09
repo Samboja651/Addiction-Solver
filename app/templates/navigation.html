@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<section id="navbar-1">
+    <nav class="navbar fixed-top navbar-expand-sm bg-body-tertiary test">
+        <div class="container-fluid">
+            <div class="system-title">
+                <span class="navbar-brand mb-0 h1">Addiction Solver</span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 customize">
+                    {% if g.user %}
+                        <!-- only for logged in user -->
+                        <!-- user name -->
+                        
+                        <!-- help -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('help.platform') }}">Help</a>
+                        </li>                        
+                
+                        <!-- logout -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                        </li>
+                        
+                        <li style="margin-left: 200px; margin-top: 7px; font-size: 20px; font-weight: bolder;">{{ g.user['username'].upper() }}</li>
+                    {% else %}
+                        <!-- show this for non logged in user -->
+                        <!-- home -->
+
+
+                        <!-- register -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                        </li>
+
+                        <!-- login -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                        </li>
+                    {% endif %}
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</section>

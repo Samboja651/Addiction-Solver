@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- bootstrap css, you can comment / uncomment to see effects -->
+</head>
+<body class="body">
+    {% include "navigation.html" %}
+
+    <section id="introduction">
+        <div class="container">
+            <h1 class="introduction">Addiction Solver - where bad habits are broken</h1>
+            <div class="intro-body">
+                <!-- class="intro-message" -->
+                <p>Are you someone struggling with addiction? </p>
+                <p>Take a breather cause you just found your solution.</p> 
+                <p>This application grants you the tools to <span style="color: green; font-weight: bold;">Conquer the struggles</span>.</p> 
+                <p style="color: green; font-weight: 500;">Live a healthier, more fulfilling life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="user-story">
+        <div class="container text-center">
+            <h2 class="text-success">Success Stories</h2>
+            <!-- one row for all story display -->
+            <div class="row d-flex flex-nowrap grid gap-3 " style="width: 500vw;">
+                {% for story in stories %}                    
+                    <div class="col success" id="story" style="min-width: 25vw; max-width: 25vw;">
+                        <a href="{{ story['story_url'] }}" id="mylink">
+                            <div class="name">
+                                <h4 class="dark" id="dark">{{ story['user_name'] }}</h4>
+                            </div>
+                            {{ story['story'] }}
+                        </a>
+                    </div>
+                {%endfor%}              
+            </div>
+        </div>
+    </section> 
+    
+    <section class="to-recovery">
+        <div class="banner">
+            <img src="{{ url_for('static', filename='images/home_banner.png') }}" alt="homebanner" width="1000px">
+        </div>
+
+        {% if g.user %}
+            <button type="button" id="form-init-btn">Click to Start the Journey</button>
+        {% endif %}
+    </section>
+
+
+    <!-- Addiction Information Form -->
+    <section class="open-up d-flex flex-wrap" >
+        <!-- <h3 id="quote-1" class="p-2 flex-shrink-1 align-self-center">Opening up is always the first step to Recovery</h3> -->
+        <div id="addiction-form-section" class="p-2 w-100">
+            {% for message in get_flashed_messages() %}
+                <div class="flash" style="text-align: center; color: crimson;">{{ message }}</div>
+            {% endfor %}
+            <h3>Tell Us About Your Addiction</h3>
+        
+            <form method="POST" action="{{ url_for('help.platform') }}" id="addiction-form">
+            <label for="addiction-type">Type of Addiction:</label>
+            <input type="text" id="addiction-type" name="addiction-type" required>
+    
+            <label for="duration">Time Duration of Addiction (in months):</label>
+            <input type="number" id="duration" name="duration" required>
+    
+            <label for="cause">Possible Cause of Addiction:</label>
+            <textarea id="cause" name="cause" rows="4" required></textarea>
+    
+            <label for="severity">Severity of Addiction:</label>
+            <select id="severity" name="severity" required>
+                <option value="blank"></option>
+                <option value="mild">Mild</option>
+                <option value="moderate">Moderate</option>
+                <option value="severe">Severe</option>
+            </select>
+    
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+    
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="blank"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+    
+            <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- <h3 id="quote-2" class="p-2 flex-shrink-1 align-self-center">You are not weak for struggling. You are strong for continuing to fight.</h3> -->
+     </section>    
+
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- bootstrap js, you can comment / uncomment to see effects -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+
+/* navbar items */
+.customize{
+    margin: auto;
+}
+#navbar-1 *{
+  background-color: greenyellow;
+}
+.introduction{
+  text-align: center;
+}
+.intro-message{
+  margin: auto;
+  text-align: center;
+}
+#introduction{
+  margin-bottom: -80px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
+
+.intro-body{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  font-size: 20px;
+  font-weight: 300;
+  
+}
+
+/*---------- success stories ------------ */
+/* story */
+.user-story{
+  overflow: hidden;
+  /* position: relative; */
+}
+
+/* user story */
+.container{
+  margin-top: 125px;
+  /* position: relative; */
+}
+
+.col{
+    border: 2px solid black;
+    border-radius: 5px;
+    /* min-width: 40%; */
+}
+/* animations 300s -50s*/
+.row{
+  overflow: hidden;
+  position: relative;
+  animation-name: story;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+}
+
+.row:hover{
+  animation-play-state: paused;
+}
+
+@keyframes story {
+    from {
+      left: 0%;
+    }
+    to {
+      left: -100%;
+    }
+}
+
+/* user */
+.name{
+    border: 2px solid lightgrey;
+    width: 100px;
+    margin-left: -12px;
+    border-radius: 3px;
+}
+#mylink{
+  text-decoration: none;
+}
+#mylink{
+  color: black;
+}
+
+/* ----------end--------------------------- */
+/* ---------------------------
+coloring the home page
+--------------------------- */
+.body{
+  background-color: var(--bs-secondary-bg);
+  width: auto;
+}
+.success{
+  background-color: var(--bs-success-bg-subtle);
+}
+.success:hover{
+  /* border: 5px solid burlywood; */
+  box-shadow: 0px 0px 8px 1px #4CAF50;
+  cursor: pointer;
+}
+
+.name h4{
+    color: var(--bs-success-text-emphasis);
+}
+.system-title{
+  margin-left: 10%;
+  margin-right: 30%;
+}
+
+
+/* user action */
+.to-recovery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+
+.to-recovery{
+  margin-bottom: 10%;
+}
+/* home banner */
+.banner, img{
+  overflow-y: hidden;
+  display: flex;
+  /* border: 2px solid black; */
+  margin-top: 2%;
+  flex-shrink: 2;
+}
+
+
+
+/* form button initializer */
+#form-init-btn{
+  /* display: flex; */
+  flex-shrink: 1;
+  margin-top: 7%;
+  font-weight: bold;
+  color: green;
+  width: 300px;
+  font-size: 40px;
+  text-align: center;
+  border: none;
+}
+#form-init-btn:hover{
+  cursor: pointer;
+  color: black;
+  background-color: lightgreen;
+}
+#quote-1, #quote-2{
+  display: none;
+  width: 30%;
+  /* margin: auto; */
+}
+
+
+/* -------------------
+Form Styles
+------------------- */
+
+#addiction-form-section {
+    display: none;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #4CAF50; 
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  #addiction-form-section h3 {
+    text-align: center;
+    color: burlywood; 
+    margin-bottom: 20px;
+  }
+  
+  #addiction-form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #addiction-form-section input,
+  #addiction-form-section textarea,
+  #addiction-form-section select {
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  #addiction-form-section select {
+    height: 40px;
+  }
+  
+  #addiction-form-section button {
+    background-color: #fff; 
+    color: #4CAF50; 
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #addiction-form-section button:hover {
+    background-color: #e0e0e0; 
+  }

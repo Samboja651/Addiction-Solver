@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error_page.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Error Occurred</h1>
+    </header>
+    <main>
+        <section>
+            <p>Oops! Something went wrong.</p>
+            <p>Please go back or try again later.</p>
+        </section>
+    </main>
+
+    <a href="/show_games/<username>">Go Home</a>
+    <br>
+    <footer>
+        <p>&copy; 2023 Games Lounge</p>
+    </footer>
+</body>
+</html>
+
+

@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+test
+app.db
+# app.py
+# documentation.txt
+
 # C extensions
 *.so
 
@@ -62,7 +67,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
-instance/
+instance
 .webassets-cache
 
 # Scrapy stuff:

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/help_platform.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% include "navigation.html" %}
+
+    <section>
+        <div class="programs" style="margin-top: 150px;">
+            <div class="peer-doctor">
+                <a href="{{ url_for('help.chat_doctor') }}">
+                    <img src="{{ url_for('static', filename='images/chat_doctor.jpg') }}" alt="chat with chat_doctor"
+                    style="width: 368px; height: 295px;">
+                    <p>Talk to a Doctor to help you walk the journey to your Recovery</p>
+                    <div class="title">Talk to a Doctor</div>
+                </a>
+            </div>
+
+            <div class="peer-peer">
+                <a href="{{ url_for('help.peer_forum') }}">
+                    <img src="{{ url_for('static', filename='images/peer_forum.jpg') }}" alt="talk to peers"
+                    style="width: 368px; height: 300px;">
+                    <p>Experience a sense of belonging by joining the community conversations</p>
+                    <div class="title forum">Peer-Peer Forum</div>
+                </a>
+            </div>
+
+            <div class="e-resources">
+                <a href="{{ url_for('resources.resource') }}">
+                    <img src="{{ url_for('static', filename='images/e_resources.png') }}" alt="learning resources"
+                    style="width: 368px; height: 306px;">
+                    <p>Learn from resources designed specifically for your needs</p>
+                    <div class="title resource">Educational Resources</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

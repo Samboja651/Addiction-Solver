@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+    <section id="support-system">
+        <div class="container">
+            <div class="personalized-chat">
+                <h3>Personalized Chat with Doctor</h3>
+                <div class="chat-box" id="doctorChat">
+                    <!-- Chat messages will be dynamically loaded here -->
+                </div>
+                <div class="input-area">
+                    <textarea id="doctorMessage" placeholder="Type your message..."></textarea>
+                    <button onclick="sendDoctorMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('receive_message', function(data) {
+            var messageClass = (data.user === 'Doctor') ? 'doctor-message' : 'user-message';
+            var messageHTML = '<div class="message ' + messageClass + '" data-id="' + data.id + '">' +
+                                  '<span class="delete-button" onclick="deleteMessage(this)">❌</span>' +
+                                  '<p>' + data.message + '</p>' +
+                              '</div>';
+            $('#doctorChat').append(messageHTML);
+            // Scroll to bottom of chat box
+            $('#doctorChat').scrollTop($('#doctorChat')[0].scrollHeight);
+        });
+
+        socket.on('delete_message', function(id) {
+            $('[data-id="' + id + '"]').remove();
+        });
+
+        function sendDoctorMessage() {
+            var message = $('#doctorMessage').val().trim();
+            if (message !== '') {
+                socket.emit('send_message', { message: message });
+                var messageHTML = '<div class="message user-message">' +
+                                      '<span class="delete-button" onclick="deleteMessage(this)">❌</span>' +
+                                      '<p>' + message + '</p>' +
+                                  '</div>';
+                $('#doctorChat').append(messageHTML);
+                // Scroll to bottom of chat box
+                $('#doctorChat').scrollTop($('#doctorChat')[0].scrollHeight);
+                $('#doctorMessage').val('');
+            }
+        }
+
+        function deleteMessage(element) {
+            var messageId = $(element).parent().data('id');
+            socket.emit('delete_message', messageId);
+        }
+    </script>
+</body>
+</html>
