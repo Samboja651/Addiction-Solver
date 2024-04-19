@@ -1,4 +1,4 @@
-# Addiction-Solver
+# Addiction-Solver 
 <img src="./app/static/images/meta-tag.jpeg" alt='image of addiction solver' width='600'/>\
 A Web Application to help people overcome their Addiction.
 [Access Live page](https://addiction-solver.onrender.com/)
