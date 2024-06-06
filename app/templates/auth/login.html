@@ -5,6 +5,26 @@
     <title>AS Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+    <!-- visibility icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;         
+        }
+        .visibility-password {
+            position: relative;
+        }
+        #visibility-icon {
+            position: absolute;
+            left: calc(100% - 45px);
+            top: 10px;
+        }
+
+        </style>
     {% include "shared.html" %}
 </head>
 <body>
@@ -19,7 +39,12 @@
     <!-- action="/login" -->
     <form method="POST">
         <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <div class="visibility-password">
+            <span id="visibility-icon" class="material-symbols-outlined" onclick="togglePassword()">
+                visibility
+            </span>
+            <input id="password" type="password" name="password" placeholder="password" autocomplete="current-password" minlength="8" required>
+        </div>
         <!-- the p tag for error message-->
         <button class="btn-login" type="submit">Log in</button>
     </form>
@@ -29,5 +54,23 @@
     <footer>
         <p>&copy; Addiction Solver</p>
     </footer>
+
+    <script>
+        // toggle password
+        const passwordInput = document.getElementById('password');
+        const visibilityIcon = document.querySelector('span#visibility-icon');
+
+
+        function togglePassword() {
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                visibilityIcon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                visibilityIcon.textContent = 'visibility';
+            }
+        }   
+    </script>
 </body>
 </html>
