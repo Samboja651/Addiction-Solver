@@ -7,18 +7,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
     <!-- visibility icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- <style>
+    <style>
         .material-symbols-outlined {
           font-variation-settings:
           'FILL' 0,
           'wght' 400,
           'GRAD' 0,
-          'opsz' 24;
-          position: absolute;
-          left: 20px;
-          
+          'opsz' 24;         
         }
-        </style> -->
+        .visibility-password {
+            position: relative;
+        }
+        #visibility-icon {
+            position: absolute;
+            left: calc(100% - 45px);
+            top: 10px;
+        }
+
+        </style>
     {% include "shared.html" %}
 </head>
 <body>
@@ -32,12 +38,13 @@
     <form method="POST">
         <input type="text" name="username" placeholder="username" autocomplete="username" required>
 
-        
-        <span id="visibility" class="material-symbols-outlined" onclick="togglePassword()">
-            visibility
-        </span>
-        <input id="password" type="password" name="password" placeholder="password" autocomplete="new-password" minlength="8" required>
-        <input type="password" name="confirm_password" placeholder="confirm password" autocomplete="new-password"  required>
+        <div class="visibility-password">
+            <span id="visibility-icon" class="material-symbols-outlined" onclick="togglePassword()">
+                visibility
+            </span>
+            <input id="password" type="password" name="password" placeholder="password" autocomplete="new-password" minlength="8" required>
+        </div>
+            <input type="password" name="confirm_password" placeholder="confirm password" autocomplete="new-password"  required>
         <button class="register-btn" type="submit">Register</button>
     </form>
 
@@ -50,20 +57,17 @@
     <script>
         // toggle password
         const passwordInput = document.getElementById('password');
-        const visibilityIcon = document.querySelector('span#visibility');
+        const visibilityIcon = document.querySelector('span#visibility-icon');
 
-        // visibilityIcon.addEventListener('click', togglePassword);
 
         function togglePassword() {
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 visibilityIcon.textContent = 'visibility_off';
-                // visibilityIcon.ariaLabel = 'hide password';
             } else {
                 passwordInput.type = 'password';
                 visibilityIcon.textContent = 'visibility';
-                // visibilityIcon.ariaLabel = 'show password in plain text'
             }
         }   
     </script>
